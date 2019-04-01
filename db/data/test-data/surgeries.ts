@@ -1,6 +1,5 @@
 class Surgery {
   constructor(
-    gp_id: number,
     surgery_name: string,
     surgery_username: string,
     surgery_password: string,
@@ -10,3 +9,11 @@ class Surgery {
 
   }
 }
+
+export const surgery1 = new Surgery(
+  'the ranch surgery',
+  'ranch_surgery',
+  'password123',
+  1,
+  'the Ranch/shed Hill/chortlon/M21 7BB'
+);
