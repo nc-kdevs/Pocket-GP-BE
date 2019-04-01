@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node listen.js",
+    "setup-dbs": "psql -f ./db/dev-setup.sql && psql -f ./db/test-setup.sql",
+    "make-migration": "knex migrate:make",
+    "migrate-latest": "knex migrate:latest",
+    "migrate-rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "test": "mocha ./spec --reporter nyan",
+    "seed:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex seed:run",
+    "migrate:latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:latest",
+    "migrate:rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:rollback"
   },
   "repository": {
     "type": "git",
@@ -27,6 +36,10 @@
     "eslint-plugin-standard": "^4.0.0"
   },
   "dependencies": {
+    "@types/node": "^11.12.2",
+    "knex": "^0.16.3",
+    "pg": "^7.9.0",
+    "pg-promise": "^8.6.4",
     "tslint": "^5.14.0",
     "typescript": "^3.4.1"
   }
