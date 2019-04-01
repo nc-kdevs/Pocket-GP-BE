@@ -17,18 +17,36 @@ const gp1 = new GP(
 	1,
 	1,
 	'Doctor Krieger'
-)
+);
 
 const gp2 = new GP(
 	2,
 	1,
 	'Madame Pomfrey'
-)
+);
 
 const gp3 = new GP(
 	3,
 	1,
-	'Doctor Zoidberg'
-)
+	'Doctor Lovelace'
+);
 
-export let gps = [gp1, gp2, gp3]
+const gp4 = new GP(
+	4,
+	2,
+	'Nurse Nightingale'
+);
+
+const gp5 = new GP(
+	5,
+	2,
+	'Doctor Harada'
+);
+
+const gp6 = new GP(
+	6,
+	2,
+	'Doctor Zoidberg'
+);
+
+export let gps = [gp1, gp2, gp3, gp4, gp5, gp6]
