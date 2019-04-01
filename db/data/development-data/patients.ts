@@ -67,4 +67,80 @@ const patient4 = new Patient(
   'developing bruising and rash'
 );
 
-export let patients = [patient1, patient2, patient3, patient4];
+const patient5 = new Patient(
+  'fluffy1999',
+  '#imGorgeous',
+  'john',
+  'xe',
+  '07881002871',
+  'fluffy1@gmail.com',
+  '14 coxes ave/MCR/M4 6an',
+  2,
+  '01739827640',
+  'allergic to peanuts'
+);
+
+const patient6 = new Patient(
+  '123chris',
+  '123chris',
+  'christopher',
+  'applebee',
+  '07221986090',
+  'chris-applebee241@outlook.com',
+  '18 green acre drive/chapeltown/MCR/M9 2PL',
+  1,
+  '01268930298'
+);
+
+const patient7 = new Patient(
+  'northcoders',
+  'federation',
+  'jonny',
+  'von flipflop',
+  '01754209871',
+  'octo-musical@yahoo.co.uk',
+  'federation house/federation street/MCR/M1 2CS',
+  2,
+  '07999210733',
+  'stress migraines'
+);
+
+const patient8 = new Patient(
+  'akira',
+  'BOOM!',
+  'akira',
+  'kutsinagi',
+  '07213223198',
+  'endoftheworld@gmail.com',
+  '12 kingdom walk/walkden/MCR/M10 7WD',
+  2,
+  '01266930211',
+  'minor excema'
+);
+
+const patient9 = new Patient(
+  'snorlax',
+  'pokeball',
+  'mr',
+  'snorlax',
+  '07213221986',
+  'ash.ketchup@outlook.com',
+  '49 lions arch/divinitys reach/prestwich/M8 2CS',
+  2,
+  '01268838871',
+);
+
+const patient10 = new Patient(
+  'KDEVS',
+  'PocketGP',
+  'rose',
+  'von snuffles',
+  '07552190789',
+  'devsRus@northcoders.co.uk',
+  '9 lions arch/divinitys reach/prestwich/M8 2CS',
+  2,
+  '01268018890',
+  'ongoing physio appointments once a month - private'
+);
+
+export let patients = [patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10];
