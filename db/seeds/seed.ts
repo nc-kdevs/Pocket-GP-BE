@@ -14,8 +14,9 @@ const seed = (knex: any, Promise: any) => knex.migrate
     return Promise.all([surgeries,patients, gps])
   })
   .then(([patients, gps]) => {
-    
-    const ailments = knex('ailments').insert
-    (ailmentData).returning('*')
+    console.log(patients, '<-- patients')
+    console.log(gps, '<-- GPs')
+    // const ailments = knex('ailments').insert
+    // (ailmentData).returning('*')
   })
 
