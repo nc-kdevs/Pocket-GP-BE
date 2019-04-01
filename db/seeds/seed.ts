@@ -5,7 +5,6 @@ const {
 const seed = (knex: any, Promise: any) => knex.migrate
   .rollback()
   .then(() => knex.migrate.latest())
-
   .then(() => {
     const surgeries = knex('surgeries')
     .insert(surgeryData)

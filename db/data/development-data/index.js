@@ -1,8 +1,4 @@
-const test = require('./test-data');
-const development = require('./development-data');
-
-const env = process.env.NODE_ENV || 'development';
-
-const data = { test, development, production: development };
-
-module.exports = data[env];
+exports.ailmentsData = require('./ailments');
+exports.gpsData = require('./gps');
+exports.patientsData = require('./patients');
+exports.surgeryData = require('./surgeries');
