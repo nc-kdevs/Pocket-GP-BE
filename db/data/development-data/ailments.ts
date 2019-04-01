@@ -96,7 +96,7 @@ const ailment7 = new Ailment(
 
 const ailment8 = new Ailment(
   'fluffy1999',
-  2,
+  8,
   'rash',
   'undiagnosed',
   'started 2 days ago',
@@ -106,7 +106,7 @@ const ailment8 = new Ailment(
 
 const ailment9 = new Ailment(
   '123chris',
-  2,
+  9,
   'anxiety',
   'mental illness',
   'exam pressure',
@@ -118,7 +118,7 @@ const ailment9 = new Ailment(
 
 const ailment10 = new Ailment(
   'northcoders',
-  1,
+  10,
   'tiredness',
   'unknown cause',
   'feels tired all the time',
@@ -129,8 +129,8 @@ const ailment10 = new Ailment(
 );
 
 const ailment11 = new Ailment(
-  'codeFox',
-  2,
+  'akira',
+  11,
   'dry skin',
   'excema',
   'skin has become flaky and sore',
@@ -140,7 +140,7 @@ const ailment11 = new Ailment(
 
 const ailment12 = new Ailment(
   'akira',
-  1,
+  12,
   'anxiety',
   'mental illness',
   'thinks everyone is out to get him',
@@ -152,7 +152,7 @@ const ailment12 = new Ailment(
 
 const ailment13 = new Ailment(
   'snorlax',
-  1,
+  13,
   'neck pain',
   'trapped nerve',
   'landed funny during a fight',
@@ -161,8 +161,8 @@ const ailment13 = new Ailment(
 );
 
 const ailment14 = new Ailment(
-  'jessJelly87',
-  2,
+  'KDEVS',
+  14,
   'knee pain',
   'torn ligiment',
   'injured by ant in a football match',
@@ -174,7 +174,7 @@ const ailment14 = new Ailment(
 
 const ailment15 = new Ailment(
   'KDEVS',
-  2,
+  15,
   'stress',
   'mental illness',
   'been putting a lot of pressure on themselves as just started new jobs',
