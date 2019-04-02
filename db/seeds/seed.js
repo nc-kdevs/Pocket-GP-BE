@@ -15,4 +15,6 @@ var seed = function (knex, Promise) { return knex.migrate
     console.log(gps, '<-- GPs');
     // const ailments = knex('ailments').insert
     // (ailmentData).returning('*')
+    return knex('surgeries', 'patients', 'gps')
+        .returning('*');
 }); };
