@@ -18,6 +18,6 @@ const seed = (knex:any, Promise:any) => knex.migrate
     // const ailments = knex('ailments').insert
     // (ailmentData).returning('*')
     return knex('surgeries','patients','gps')
-    .returning('*')
+    .returning('*');
   })
 
