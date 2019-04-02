@@ -3,18 +3,16 @@ exports.seed = function (knex, Promise) { return knex.migrate
     .rollback()
     .then(function () { return knex.migrate.latest(); })
     .then(function () {
-    var surgeries = knex('surgeries')
-        .insert(surgeryData);
-    var patients = knex('patients').insert(patientData).returning('*');
-    var gps = knex('gps').insert(gpData).returning('*');
-    return Promise.all([surgeries, patients, gps]);
+    return knex('surgeries').insert(surgeryData).returning('*');
 })
-    .then(function (_a) {
-    var patients = _a[0], gps = _a[1];
-    console.log(patients, '<-- patients');
-    console.log(gps, '<-- GPs');
-    // const ailments = knex('ailments').insert
-    // (ailmentData).returning('*')
-    return knex('surgeries', 'gps', 'patients')
-        .returning('*');
+    .then(function (surgeries) {
+    console.log(surgeries, '<-- surgeries');
+    return knex('patients').insert(patientData).returning('*');
+})
+    .then(function (gps) {
+    console.log(gps, '<--gps');
+    return knex('ailments').insert(ailmentData).returning('*');
+})
+    .then(function (ailments) {
+    console.log(ailments, '<-- ailments');
 }); };
