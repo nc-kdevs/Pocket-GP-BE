@@ -17,14 +17,14 @@ const dbConfig = {
   },
   development: {
     connection: {
-      database: 'PocketGP',
+      database: 'pocketGP',
     },
   },
   test: {
     connection: {
-      database: 'PocketGP_test',
+      database: 'pocketGP_test',
     },
   },
 };
-
+ 
 module.exports = { ...baseConfig, ...dbConfig[ENV] };

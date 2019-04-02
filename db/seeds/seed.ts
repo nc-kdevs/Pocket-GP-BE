@@ -2,7 +2,7 @@ const {
   patientData, gpData, ailmentData, surgeryData,
 } = require('../data/index.js');
 
-const seed = (knex:any, Promise:any) => knex.migrate
+exports.seed = (knex, Promise) => knex.migrate
   .rollback()
   .then(() => knex.migrate.latest())
   .then(() => {
@@ -17,7 +17,7 @@ const seed = (knex:any, Promise:any) => knex.migrate
     console.log(gps, '<-- GPs')
     // const ailments = knex('ailments').insert
     // (ailmentData).returning('*')
-    return knex('surgeries','patients','gps')
-    .returning('*') 
+    return knex('surgeries', 'gps', 'patients')
+      .returning('*')
   })
 
