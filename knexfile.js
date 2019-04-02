@@ -26,5 +26,5 @@ const dbConfig = {
     },
   },
 };
-
+ 
 module.exports = { ...baseConfig, ...dbConfig[ENV] };
