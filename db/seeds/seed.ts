@@ -16,5 +16,4 @@ exports.seed = (knex, Promise) => knex.migrate
   })
   .then(() => {
     return knex('ailments').insert(ailmentsData).returning('*')
-  })
-  .then(console.log)
+  });
