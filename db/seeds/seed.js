@@ -1,5 +1,5 @@
 var _a = require('../data/index.js'), patientData = _a.patientData, gpData = _a.gpData, ailmentData = _a.ailmentData, surgeryData = _a.surgeryData;
-var seed = function (knex, Promise) { return knex.migrate
+exports.seed = function (knex, Promise) { return knex.migrate
     .rollback()
     .then(function () { return knex.migrate.latest(); })
     .then(function () {
@@ -15,4 +15,6 @@ var seed = function (knex, Promise) { return knex.migrate
     console.log(gps, '<-- GPs');
     // const ailments = knex('ailments').insert
     // (ailmentData).returning('*')
+    return knex('surgeries', 'gps', 'patients')
+        .returning('*');
 }); };
