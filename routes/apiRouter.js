@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+exports.apiRouter = require('express').Router();
+var gpsRouter = require("./routes/gpsRouter.js");
+var patientsRouter = require("./routes/patientsRouter.js");
+var surgeriesRouter = require("./routes/surgeriesRouter.js");
+var ailmentsRouter = require("./routes/ailmentsRouter.js");
+exports.apiRouter.use('/gps', gpsRouter);
+exports.apiRouter.use('/patients', patientsRouter);
+exports.apiRouter.use('/surgeries', surgeriesRouter);
+exports.apiRouter.use('/ailments', ailmentsRouter);
