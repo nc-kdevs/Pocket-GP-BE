@@ -8,4 +8,12 @@ var request = supertest(appTest);
 describe('/', function () {
     beforeEach(function () { return connection.seed.run(); });
     after(function () { return connection.destroy(); });
+    describe('/gps', function () {
+    });
+    describe('/patients', function () {
+    });
+    describe('/surgeries', function () {
+    });
+    describe('/ailments', function () {
+    });
 });
