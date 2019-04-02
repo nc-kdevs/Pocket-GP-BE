@@ -1,146 +1,120 @@
-class Patient {
-  constructor(
-    patient_username: string,
-    patient_password: string,
-    first_name: string,
-    surname: string,
-    telephone: string,
-    email: string,
-    address: string,
-    surgery_id: number,
-    emerg_contact: string,
-    general_med?: string,
-  ) {
-
-  }
+module.exports = [
+{
+  patient_username: 'billybob22',
+  patient_password: 'cowboy55',
+  first_name: 'billy',
+  surname: 'bob',
+  telephone: '07872630981',
+  email: 'cowboybilly@gmail.com',
+  address: 'the Ranch/shed Hill/chortlon/M21 7BB',
+  surgery_id: 1,
+  emerg_contact: '01739827640',
+  general_med: 'penicillan LSD cronic back pain headaches and anxiety',
+},
+{
+  patient_username: 'spike',
+  patient_password: 'password',
+  first_name: 'sarah',
+  surname: 'applebee',
+  telephone: '07719820081',
+  email: 'spikeyGirlBrackets@outlook.com',
+  address: '18 green acre drive/chapeltown/MCR/M9 2PL',
+  surgery_id: 1,
+  emerg_contact: '01268930298',
+  general_med: 'pregnant diabetic',
+},
+{
+  patient_username: 'snuffles3',
+  patient_password: 'password2',
+  first_name: 'chauncey',
+  surname: 'von snuffles',
+  telephone: '07987777790',
+  email: 'chaunceyvonsnufflesthethird@guildwars.co.uk',
+  address: '9 lions arch/divinitys reach/prestwich/M8 2CS',
+  surgery_id: 1,
+  emerg_contact: '01268930298',
+  general_med: 'stress valium migraines',
+},
+{
+  patient_username: 'captainGrimes',
+  patient_password: 'hilltop23',
+  first_name: 'daryl',
+  surname: 'grimes',
+  telephone: '07820371134',
+  email: 'daryl-grimes@yahoo.co.uk',
+  address: '13 kingdom walk/walkden/MCR/M10 7WD',
+  surgery_id: 1,
+  emerg_contact: '01268930200',
+  general_med: 'developing bruising and rash',
+},
+{
+  patient_username: 'fluffy1999',
+  patient_password: '#imGorgeous',
+  first_name: 'john',
+  surname: 'xe',
+  telephone: '07881002871',
+  email: 'fluffy1@gmail.com',
+  address: '14 coxes ave/MCR/M4 6an',
+  surgery_id: 2,
+  emerg_contact: '01739827640',
+  general_med: 'allergic to peanuts',
+},
+{
+  patient_username: '123chris',
+  patient_password: '123chris',
+  first_name: 'christopher',
+  surname: 'applebee',
+  telephone: '07221986090',
+  email: 'chris-applebee241@outlook.com',
+  address: '18 green acre drive/chapeltown/MCR/M9 2PL',
+  surgery_id: 1,
+  emerg_contact: '01268930298',
+},
+{
+  patient_username: 'northcoders',
+  patient_password: 'federation',
+  first_name: 'jonny',
+  surname: 'von flipflop',
+  telephone: '01754209871',
+  email: 'octo-musical@yahoo.co.uk',
+  address: 'federation house/federation street/MCR/M1 2CS',
+  surgery_id: 2,
+  emerg_contact: '07999210733',
+  general_med: 'stress migraines',
+},
+{
+  patient_username: 'akira',
+  patient_password: 'BOOM!',
+  first_name: 'akira',
+  surname: 'kutsinagi',
+  telephone: '07213223198',
+  email: 'endoftheworld@gmail.com',
+  address: '12 kingdom walk/walkden/MCR/M10 7WD',
+  surgery_id: 2,
+  emerg_contact: '01266930211',
+  general_med: 'minor excema',
+},
+{
+  patient_username: 'snorlax',
+  patient_password: 'pokeball',
+  first_name: 'mr',
+  surname: 'snorlax',
+  telephone: '07213221986',
+  email: 'ash.ketchup@outlook.com',
+  address: '49 lions arch/divinitys reach/prestwich/M8 2CS',
+  surgery_id: 2,
+  emerg_contact: '01268838871',
+},
+{
+  patient_username: 'KDEVS',
+  patient_password: 'PocketGP',
+  first_name: 'rose',
+  surname: 'von snuffles',
+  telephone: '07552190789',
+  email: 'devsRus@northcoders.co.uk',
+  address: '9 lions arch/divinitys reach/prestwich/M8 2CS',
+  surgery_id: 2,
+  emerg_contact: '01268018890',
+  general_med: 'ongoing physio appointments once a month - private',
 }
-
-const patient1 = new Patient(
-  'billybob22',
-  'cowboy55',
-  'billy',
-  'bob',
-  '07872630981',
-  'cowboybilly@gmail.com',
-  'the Ranch/shed Hill/chortlon/M21 7BB',
-  1,
-  '01739827640',
-  'penicillan LSD cronic back pain headaches and anxiety'
-);
-
-const patient2 = new Patient(
-  'spike',
-  'password',
-  'sarah',
-  'applebee',
-  '07719820081',
-  'spikeyGirlBrackets@outlook.com',
-  '18 green acre drive/chapeltown/MCR/M9 2PL',
-  1,
-  '01268930298',
-  'pregnant diabetic'
-);
-
-const patient3 = new Patient(
-  'snuffles3',
-  'password2',
-  'chauncey',
-  'von snuffles',
-  '07987777790',
-  'chaunceyvonsnufflesthethird@guildwars.co.uk',
-  '9 lions arch/divinitys reach/prestwich/M8 2CS',
-  1,
-  '01268930298',
-  'stress valium migraines'
-);
-
-const patient4 = new Patient(
-  'captainGrimes',
-  'hilltop23',
-  'daryl',
-  'grimes',
-  '07820371134',
-  'daryl-grimes@yahoo.co.uk',
-  '13 kingdom walk/walkden/MCR/M10 7WD',
-  1,
-  '01268930200',
-  'developing bruising and rash'
-);
-
-const patient5 = new Patient(
-  'fluffy1999',
-  '#imGorgeous',
-  'john',
-  'xe',
-  '07881002871',
-  'fluffy1@gmail.com',
-  '14 coxes ave/MCR/M4 6an',
-  2,
-  '01739827640',
-  'allergic to peanuts'
-);
-
-const patient6 = new Patient(
-  '123chris',
-  '123chris',
-  'christopher',
-  'applebee',
-  '07221986090',
-  'chris-applebee241@outlook.com',
-  '18 green acre drive/chapeltown/MCR/M9 2PL',
-  1,
-  '01268930298'
-);
-
-const patient7 = new Patient(
-  'northcoders',
-  'federation',
-  'jonny',
-  'von flipflop',
-  '01754209871',
-  'octo-musical@yahoo.co.uk',
-  'federation house/federation street/MCR/M1 2CS',
-  2,
-  '07999210733',
-  'stress migraines'
-);
-
-const patient8 = new Patient(
-  'akira',
-  'BOOM!',
-  'akira',
-  'kutsinagi',
-  '07213223198',
-  'endoftheworld@gmail.com',
-  '12 kingdom walk/walkden/MCR/M10 7WD',
-  2,
-  '01266930211',
-  'minor excema'
-);
-
-const patient9 = new Patient(
-  'snorlax',
-  'pokeball',
-  'mr',
-  'snorlax',
-  '07213221986',
-  'ash.ketchup@outlook.com',
-  '49 lions arch/divinitys reach/prestwich/M8 2CS',
-  2,
-  '01268838871',
-);
-
-const patient10 = new Patient(
-  'KDEVS',
-  'PocketGP',
-  'rose',
-  'von snuffles',
-  '07552190789',
-  'devsRus@northcoders.co.uk',
-  '9 lions arch/divinitys reach/prestwich/M8 2CS',
-  2,
-  '01268018890',
-  'ongoing physio appointments once a month - private'
-);
-
-export let patients = [patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10];
+];

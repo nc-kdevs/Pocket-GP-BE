@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
   (ailmentsTable) => {
       ailmentsTable.string('patient_username').notNullable();
       ailmentsTable.foreign('patient_username').references('patient_username').on('patients').onDelete('CASCADE');
-      ailmentsTable.increments('patient_id');
+      ailmentsTable.increments('ailment_id').primary();
       ailmentsTable.string('ailment_type').notNullable();
       ailmentsTable.string('ailment_name').notNullable();
       ailmentsTable.string('ailment_description', 255).notNullable();
