@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS pocketGP_test;
-CREATE DATABASE pocketGP_test;
+DROP DATABASE IF EXISTS pocketgp_test;
+CREATE DATABASE pocketgp_test;

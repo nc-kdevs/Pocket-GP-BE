@@ -17,12 +17,12 @@ const dbConfig = {
   },
   development: {
     connection: {
-      database: 'pocketGP',
+      database: 'pocketgp',
     },
   },
   test: {
     connection: {
-      database: 'pocketGP_test',
+      database: 'pocketgp_test',
     },
   },
 };
