@@ -72,6 +72,4 @@ module.exports = [
   date: '2018-12-2116:12:98ZT',
   image: 'URL'
   }
-]
-
-export let ailments = [ailment1, ailment2, ailment3, ailment4, ailment5, ailment6, ailment7];
+];

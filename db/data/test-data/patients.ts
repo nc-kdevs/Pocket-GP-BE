@@ -47,12 +47,4 @@ module.exports = [
     emerg_contact: '01268930200',
     general_med: 'developing bruising and rash'
   }
-]
-
-
-
-
-
-
-
-
+];

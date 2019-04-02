@@ -11,7 +11,7 @@
     "migrate-rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
     "compile": "tsc ./db/seeds/seed.ts",
-    "compile-test-data":"tsc ./db/data/test-data/*",
+    "compile-test-data":"tsc ./db/data/test-data/*.ts",
     "test": "mocha ./spec --reporter nyan",
     "seed:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex seed:run",
     "migrate:latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:latest",

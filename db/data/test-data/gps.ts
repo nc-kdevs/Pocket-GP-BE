@@ -11,10 +11,4 @@ module.exports = [
 		surgery_id: 1,
 		gp_name:'Doctor Zoidberg'
 	},
-]
-	
-	
-
-
-
-
+];
