@@ -1,17 +1,8 @@
-class Surgery {
-  constructor(
-    surgery_name: string,
-    surgery_username: string,
-    surgery_password: string,
-    surgery_address: string,
-  ) {
-
+module.exports = [
+  {
+      surgery_name: 'the ranch surgery',
+      surgery_username: 'ranch_surgery',
+      surgery_password: 'password123',
+      surgery_address: 'the Ranch/shed Hill/chortlon/M21 7BB'
   }
-}
-
-export const surgery1 = new Surgery(
-  'the ranch surgery',
-  'ranch_surgery',
-  'password123',
-  'the Ranch/shed Hill/chortlon/M21 7BB'
-);
+];

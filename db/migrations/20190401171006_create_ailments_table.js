@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
       ailmentsTable.string('ailment_type').notNullable();
       ailmentsTable.string('ailment_name').notNullable();
       ailmentsTable.string('ailment_description', 255).notNullable();
-      ailmentsTable.date('date').defaultsTo(knex.fn.now());
+      ailmentsTable.timestamp('date', { useTz: true }).defaultsTo(knex.fn.now());
       ailmentsTable.string('image');
       ailmentsTable.string('prescription');
       ailmentsTable.string('treatment_table');
