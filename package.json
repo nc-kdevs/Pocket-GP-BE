@@ -4,7 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node listen.js",
+    "setup-dbs": "psql -f ./db/dev-setup.sql && psql -f ./db/test-setup.sql",
+    "make-migration": "knex migrate:make",
+    "migrate-latest": "knex migrate:latest",
+    "migrate-rollback": "knex migrate:rollback",
+    "seed": "tsc ./db/seeds/seed.ts && knex seed:run",
+    "compile-test-data": "tsc ./db/data/test-data/*.ts",
+    "compile-dev-data": "tsc ./db/data/development-data/*.ts",
+    "test": "tsc ./spec/utils.spec.ts && mocha ./spec/utils.spec.js",
+    "seed:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex seed:run",
+    "migrate:latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:latest",
+    "migrate:rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:rollback"
   },
   "repository": {
     "type": "git",
@@ -18,6 +29,7 @@
   },
   "homepage": "https://github.com/muhammad-shahroze/Pocket-GP-BE#readme",
   "devDependencies": {
+    "@types/mocha": "^5.2.6",
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "eslint": "^5.15.3",
     "eslint-config-standard": "^12.0.0",
@@ -27,7 +39,13 @@
     "eslint-plugin-standard": "^4.0.0"
   },
   "dependencies": {
+    "@types/node": "^11.12.2",
+    "chai": "^4.2.0",
+    "knex": "^0.16.3",
+    "mocha": "^6.0.2",
+    "pg": "^7.9.0",
+    "pg-promise": "^8.6.4",
     "tslint": "^5.14.0",
-    "typescript": "^3.3.4000"
+    "typescript": "^3.4.1"
   }
 }
