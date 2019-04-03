@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-import apiRouter = require('./routes/apiRouter.js');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import apiRouter from './routes/apiRouter.js';
 
 const app = express();
 
@@ -17,4 +17,4 @@ app.all('/*', (req: any, res: any) => {
   res.status(404).send({ status: 404, msg: 'Sorry, not found...' });
 });
 
-module.exports = app;
+export = app;
