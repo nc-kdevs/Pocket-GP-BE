@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
       ailmentsTable.timestamp('date', { useTz: true }).defaultsTo(knex.fn.now());
       ailmentsTable.string('image');
       ailmentsTable.string('prescription');
-      ailmentsTable.string('treatment_table');
+      ailmentsTable.string('treatment_plan');
 
   })
 };

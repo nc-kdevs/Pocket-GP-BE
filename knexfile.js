@@ -18,13 +18,17 @@ const dbConfig = {
   development: {
     connection: {
       database: 'pocketgp',
+      username: 'rosiline',
+      password: 'password'
     },
   },
   test: {
     connection: {
       database: 'pocketgp_test',
+      username: 'rosiline',
+      password: 'password'
     },
   },
 };
- 
+
 module.exports = { ...baseConfig, ...dbConfig[ENV] };
