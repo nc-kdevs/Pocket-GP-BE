@@ -30,6 +30,16 @@ describe('/', () => {
         expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address')
       })
     })
-  });
+    it('POST / responds with status 400 - Invalid Body', () => {
+      const newSurgery = {surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th'};
+      return request.post('/api/surgeries').send(newSurgery).expect(400).then((res: any) => {
+        expect(res.body.message).to.equal('Invalid Request')
+      })
+    });
+    xit('DELETE / responds with status 405 - Invalid Method', () => {
+      return request.delete('/api/surgeries').expect(405).then((res: any) => {
+        expect(res.body.msg).to.equal('Method Not Allowed')
+      })
+    });
 });
-
+})

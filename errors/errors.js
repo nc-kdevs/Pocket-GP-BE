@@ -1,8 +1,11 @@
 "use strict";
 exports.__esModule = true;
 exports.handle400 = function (err, req, res, next) {
+    console.log(err);
     var code = err.code;
-    var errorCodes400 = {};
+    var errorCodes400 = {
+        23502: 'Invalid Request'
+    };
     if (errorCodes400[code] || err.status === 400) {
         res.status(400).send({ message: errorCodes400[code] || err.msg });
     }

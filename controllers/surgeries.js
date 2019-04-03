@@ -13,5 +13,5 @@ exports.postSurgery = function (req, res, next) {
         .then(function (_a) {
         var surgery = _a[0];
         return res.status(201).send({ surgery: surgery });
-    })["catch"](console.log);
+    })["catch"](next);
 };

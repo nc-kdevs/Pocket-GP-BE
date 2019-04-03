@@ -15,5 +15,5 @@ export const postSurgery = (req: Request, res: Response, next: NextFunction) => 
     .then(([surgery]) => {
       return res.status(201).send({surgery})
     })
-    .catch(console.log)
+    .catch(next)
 }
