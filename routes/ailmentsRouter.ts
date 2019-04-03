@@ -1,6 +1,6 @@
-import express from 'express';
+import * as express from 'express';
 const ailmentsRouter = express.Router();
 
 ailmentsRouter.route('/')
 
-export = ailmentsRouter;
+export default ailmentsRouter;

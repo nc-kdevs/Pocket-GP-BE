@@ -1,4 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.gpsRouter = require('express').Router();
-exports.gpsRouter.route('/');
+var express = require("express");
+var gpsRouter = express.Router();
+gpsRouter.route('/');
+exports["default"] = gpsRouter;

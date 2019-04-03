@@ -1,6 +1,6 @@
-import express from 'express';
+import * as express from 'express';
 const gpsRouter = express.Router();
 
 gpsRouter.route('/')
 
-export = gpsRouter;
+export default gpsRouter;

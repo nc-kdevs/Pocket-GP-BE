@@ -1,4 +1,4 @@
-import express from 'express';
+import * as express from 'express';
 const apiRouter = express.Router();
 
 import gpsRouter from './gpsRouter';
@@ -11,4 +11,4 @@ apiRouter.use('/patients', patientsRouter);
 apiRouter.use('/surgeries', surgeriesRouter);
 apiRouter.use('/ailments', ailmentsRouter);
 
-export = apiRouter;
+export default apiRouter;

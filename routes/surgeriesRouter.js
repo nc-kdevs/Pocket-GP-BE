@@ -1,4 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.surgeriesRouter = require('express').Router();
-exports.surgeriesRouter.route('/');
+var express = require("express");
+var surgeriesRouter = express.Router();
+surgeriesRouter.route('/');
+exports["default"] = surgeriesRouter;

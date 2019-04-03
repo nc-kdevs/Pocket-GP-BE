@@ -1,7 +1,5 @@
 process.env.NODE_ENV = 'test';
 
-process.env.NODE_ENV = 'test';
-
 const { expect } = require('chai');
 const supertest = require('supertest');
 const connection = require('../db/connection.js');
@@ -19,7 +17,9 @@ describe('/', () => {
 
   });
   describe('/surgeries', () => {
-
+    it('GET 200 returns a list of all the surgeries', () => {
+      return request.get('/api/surgeries').expect(200);
+    });
   });
   describe('/ailments', () => {
 

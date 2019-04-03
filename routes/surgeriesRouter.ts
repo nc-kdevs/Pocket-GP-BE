@@ -1,6 +1,6 @@
-import express from 'express';
+import * as express from 'express';
 const surgeriesRouter = express.Router();
 
 surgeriesRouter.route('/')
 
-export = surgeriesRouter;
+export default surgeriesRouter;
