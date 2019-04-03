@@ -1,3 +1,6 @@
-export const surgeriesRouter = require('express').Router();
+import express from 'express';
+const ailmentsRouter = express.Router();
 
-surgeriesRouter.route('/')
+ailmentsRouter.route('/')
+
+export = ailmentsRouter;
