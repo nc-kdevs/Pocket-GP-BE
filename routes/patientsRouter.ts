@@ -1,3 +1,6 @@
-export const patientsRouter = require('express').Router();
+import express from 'express';
+const patientsRouter = express.Router();
 
 patientsRouter.route('/')
+
+export = patientsRouter;
