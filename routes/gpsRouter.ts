@@ -1,3 +1,6 @@
-export const gpsRouter = require('express').Router();
+import express from 'express';
+const gpsRouter = express.Router();
 
 gpsRouter.route('/')
+
+export = gpsRouter;
