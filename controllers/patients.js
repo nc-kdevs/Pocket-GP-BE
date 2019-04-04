@@ -18,3 +18,13 @@ exports.updatePatientByUsername = function (req, res, next) {
         res.status(200).send({ patient: patient });
     })["catch"](next);
 };
+exports.deletePatientByUsername = function (req, res, next) {
+    var username = req.params.username;
+    patients_js_1.deletePatient(username)
+        .then(function (output) {
+        if (output === 1)
+            res.sendStatus(204);
+        else
+            next({ status: 404 });
+    })["catch"](next);
+};

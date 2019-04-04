@@ -24,11 +24,14 @@ describe('/', () => {
         expect(body.patient).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
       })
     })
-    it.only('PATCH 200 /username update patients data and return updated patient', () => {
+    it('PATCH 200 /username update patients data and return updated patient', () => {
       const updatePatient = {patient_username: '', patient_password: '', first_name: 'Jimmy',surname: '',telephone: '',email: '',address: '',surgery_id: '',emerg_contact: '',general_med: ''}
       return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(res => {
         expect(res.body.patient.first_name).to.equal('Jimmy')
       })
+    })
+    it.only('DELETE 204 /username deletes patient object when given a valid username', () => {
+      request.delete('/api/patients/billybob22').expect(204);
     })
   });
   describe('/surgeries', () => {

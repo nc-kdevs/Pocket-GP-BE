@@ -18,3 +18,7 @@ export const updatePatient = (username:string,{patient_username,patient_password
 	if(general_med) updatePatientDetails.general_med = general_med;
 	return connection('patients').where('patient_username',username).update(updatePatientDetails).returning('*')
 }
+
+export const deletePatient = (username:string) => {
+	return connection.select('*').from('patients').where('patient_username',username).del()
+}

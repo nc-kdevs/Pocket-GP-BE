@@ -29,3 +29,6 @@ exports.updatePatient = function (username, _a) {
         updatePatientDetails.general_med = general_med;
     return connection('patients').where('patient_username', username).update(updatePatientDetails).returning('*');
 };
+exports.deletePatient = function (username) {
+    return connection.select('*').from('patients').where('patient_username', username).del();
+};
