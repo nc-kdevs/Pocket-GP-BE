@@ -7,3 +7,8 @@ exports.fetchGps = function (conditions) {
         .from('gps')
         .where(conditions);
 };
+exports.addGp = function (gp) {
+    return connection('gps')
+        .insert(gp)
+        .returning('*');
+};

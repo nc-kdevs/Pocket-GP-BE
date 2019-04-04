@@ -6,3 +6,9 @@ export const fetchGps = (conditions: object) => {
     .from('gps')
     .where(conditions)
 }
+
+export const addGp = (gp: object) => {
+  return connection('gps')
+    .insert(gp)
+    .returning('*');
+}
