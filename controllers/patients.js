@@ -55,7 +55,9 @@ exports.postUserAilment = function (req, res, next) {
     var ailmentObj = req.body;
     var username = req.params.username;
     ailmentObj.patient_username = username;
-    console.log(ailmentObj);
     patients_js_1.createUserAilment(ailmentObj)
-        .then(console.log);
+        .then(function (_a) {
+        var ailment = _a[0];
+        res.status(201).send({ ailment: ailment });
+    })["catch"](next);
 };

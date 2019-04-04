@@ -6,12 +6,8 @@ var supertest = require('supertest');
 var connection = require('../db/connection.js');
 var appTest = require('../app');
 var request = supertest(appTest);
-// console.log(appTest)
 describe('/', function () {
-    beforeEach(function () {
-        console.log(appTest.listeners());
-        return connection.seed.run();
-    });
+    beforeEach(function () { return connection.seed.run(); });
     after(function () { return connection.destroy(); });
     describe('/gps', function () {
     });
@@ -44,17 +40,20 @@ describe('/', function () {
             });
         });
     });
-    describe.only('/patients/:username/ailments', function () {
-        it.only('GET 200 returns ailments by patient username', function () {
+    describe('/patients/:username/ailments', function () {
+        it('GET 200 returns ailments by patient username', function () {
             return request.get('/api/patients/spike/ailments').expect(200).then(function (res) {
                 expect(res.body.ailments[0].ailment_type).to.equal('diabetic');
             });
         });
-        it.only('POST / 201 returns new posted user ailment', function () {
+        it('POST / 201 returns new posted user ailment', function () {
             var ailmentObj = {
                 ailment_type: 'new ail',
                 ailment_name: 'new ail name',
-                ailment_description: 'new ail desc'
+                ailment_description: 'new ail desc',
+                image: 'url',
+                prescription: 'presc',
+                treatment_plan: 'plan'
             };
             return request
                 .post('/api/patients/spike/ailments')
@@ -82,7 +81,7 @@ describe('/', function () {
                     expect(res.body.message).to.equal('Invalid Request');
                 });
             });
-            it('DELETE / responds with status 405 - Invalid Method', function () {
+            xit('DELETE / responds with status 405 - Invalid Method', function () {
                 return request["delete"]('/api/surgeries').expect(405).then(function (res) {
                     expect(res.body.msg).to.equal('Method Not Allowed');
                 });
