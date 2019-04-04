@@ -125,7 +125,7 @@ describe('/', () => {
   describe('/surgeries/:surgery_id', () => {
     it('GET 200 returns surgery by surgery_id', () => {
       return request.get('/api/surgeries/1').expect(200).then((res: any) => {
-        expect(res.body.surgery.surgery_name).to.equal('the ranch surgery')
+        expect(res.body.surgery[0].surgery_name).to.equal('the ranch surgery')
       })
     })
     it('PATCH / responds with status 200 and patched surgery', () => {
@@ -136,5 +136,11 @@ describe('/', () => {
     })
     it('DELETE / responds with status 204 and no-content', () => request.delete('/api/surgeries/1').expect(204));
   })
+  describe('/patients/:username/ailments', () => {
+    it('GET 200 returns ailments by patient username', () => {
+      return request.get('/api/patients/spike/ailments').expect(200).then((res: any) => {
+        expect(res.body.ailments[0].ailment_type).to.equal('diabetic')
+        })
+      })
+  });
 });
-

@@ -18,8 +18,7 @@ exports.postSurgery = function (req, res, next) {
 exports.getSurgeryByID = function (req, res, next) {
     var surgery_id = req.params.surgery_id;
     surgeries_js_1.fetchSurgeryByID(surgery_id)
-        .then(function (_a) {
-        var surgery = _a[0];
+        .then(function (surgery) {
         res.status(200).send({ surgery: surgery });
     })["catch"](next);
 };

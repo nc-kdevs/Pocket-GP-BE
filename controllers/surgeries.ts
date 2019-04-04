@@ -21,7 +21,7 @@ export const postSurgery = (req: Request, res: Response, next: NextFunction) => 
 export const getSurgeryByID = (req: Request, res: Response, next: NextFunction) => {
   const surgery_id: number = req.params.surgery_id;
   fetchSurgeryByID(surgery_id)
-    .then(([surgery]) => {
+    .then((surgery: object[]) => {
       res.status(200).send({surgery})
     })
     .catch(next)
