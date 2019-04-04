@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction  } from 'express';
 
 export const handle400 = (err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log(err)
   const { code } = err;
   const errorCodes400 = {
     [code]: 'Invalid Request'

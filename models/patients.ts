@@ -22,3 +22,9 @@ export const updatePatient = (username:string,{patient_username,patient_password
 export const deletePatient = (username:string) => {
 	return connection.select('*').from('patients').where('patient_username',username).del()
 }
+
+export const getPatients = ({surgery_id}) => {
+	const queries = {};
+	if(surgery_id) queries['surgeries.surgery_id'] = surgery_id
+	return connection.select('*').from('surgeries').leftJoin('patients','surgeries.surgery_id','patients.surgery_id').where(queries);
+}

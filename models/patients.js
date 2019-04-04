@@ -32,3 +32,10 @@ exports.updatePatient = function (username, _a) {
 exports.deletePatient = function (username) {
     return connection.select('*').from('patients').where('patient_username', username).del();
 };
+exports.getPatients = function (_a) {
+    var surgery_id = _a.surgery_id;
+    var queries = {};
+    if (surgery_id)
+        queries['surgeries.surgery_id'] = surgery_id;
+    return connection.select('*').from('surgeries').leftJoin('patients', 'surgeries.surgery_id', 'patients.surgery_id').where(queries);
+};

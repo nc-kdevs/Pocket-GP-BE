@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var patients_js_1 = require("../models/patients.js");
-exports.getAllPatientsByUsername = function (req, res, next) {
+exports.getPatientByUsername = function (req, res, next) {
     var username = req.params.username;
     patients_js_1.fetchPatientByUsername(username)
         .then(function (_a) {
@@ -26,5 +26,13 @@ exports.deletePatientByUsername = function (req, res, next) {
             res.sendStatus(204);
         else
             next({ status: 404 });
+    })["catch"](next);
+};
+exports.getAllPatients = function (req, res, next) {
+    var surgery_id = req.query.surgery_id;
+    patients_js_1.getPatients({ surgery_id: surgery_id })
+        .then(function (_a) {
+        var patients = _a[0];
+        res.status(200).send({ patients: patients });
     })["catch"](next);
 };

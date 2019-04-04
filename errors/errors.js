@@ -2,7 +2,6 @@
 exports.__esModule = true;
 exports.handle400 = function (err, req, res, next) {
     var _a;
-    console.log(err);
     var code = err.code;
     var errorCodes400 = (_a = {},
         _a[code] = 'Invalid Request',

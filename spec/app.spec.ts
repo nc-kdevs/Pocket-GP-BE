@@ -30,10 +30,16 @@ describe('/', () => {
         expect(res.body.patient.first_name).to.equal('Jimmy')
       })
     })
-    it.only('DELETE 204 /username deletes patient object when given a valid username', () => {
+    it('DELETE 204 /username deletes patient object when given a valid username', () => {
       request.delete('/api/patients/billybob22').expect(204);
     })
+    it.only('GET 200 /surgery_id returns list of all patients', () => {
+      return request.get('/api/patients?surgery_id=1').expect(200).then(({body}:any) => {
+        expect(body.patients).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
+      })
+    })
   });
+
   describe('/surgeries', () => {
     it('GET 200 returns a list of all the surgeries', () => {
       return request.get('/api/surgeries').expect(200).then((res: any) => {
