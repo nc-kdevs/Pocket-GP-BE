@@ -1,8 +1,9 @@
 "use strict";
 exports.__esModule = true;
 var connection = require("../db/connection");
-exports.fetchGps = function () {
+exports.fetchGps = function (conditions) {
     return connection
         .select('*')
-        .from('gps');
+        .from('gps')
+        .where(conditions);
 };

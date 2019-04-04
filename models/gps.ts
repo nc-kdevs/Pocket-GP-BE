@@ -1,7 +1,8 @@
 import * as connection from '../db/connection';
 
-export const fetchGps = () => {
+export const fetchGps = (conditions: object) => {
   return connection
     .select('*')
-    .from('gps');
+    .from('gps')
+    .where(conditions)
 }
