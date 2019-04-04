@@ -51,5 +51,11 @@ describe('/', () => {
         expect(res.body.surgery[0].surgery_name).to.equal('the ranch surgery')
       })
     })
+    it('PATCH / responds with status 200 and patched surgery', () => {
+      const surgeryPatch = { surgery_name: 'new surgery name' }
+      return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then((res: any) => {
+        expect(res.body.surgery[0].surgery_name).to.equal('new surgery name')
+      })
+    })
   })
 });
