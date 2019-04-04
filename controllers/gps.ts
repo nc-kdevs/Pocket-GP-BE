@@ -13,7 +13,7 @@ export const getGps = (req: Request, res: Response, next: NextFunction) => {
     .catch(next)
 }
 
-export const postGps = (req: Request, res: Response, next: NextFunction) => {
+export const postGp = (req: Request, res: Response, next: NextFunction) => {
 
 }
 
@@ -21,6 +21,6 @@ export const getGpByID = (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-export const deleteGp = (req: Request, res: Response, next: NextFunction) => {
+export const deleteGpByID = (req: Request, res: Response, next: NextFunction) => {
 
 }

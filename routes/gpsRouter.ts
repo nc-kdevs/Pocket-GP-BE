@@ -1,6 +1,6 @@
 import * as express from 'express';
 const gpsRouter = express.Router();
-import { getGps, postGp, getGpsByID, deleteGpByID } from '../controllers/gps.js'
+import { getGps, postGp, getGpByID, deleteGpByID } from '../controllers/gps.js'
 import { handle405 } from '../errors/errors.js';
 
 gpsRouter.route('/')
@@ -9,7 +9,7 @@ gpsRouter.route('/')
   .all(handle405);
 
 gpsRouter.route('/:gp_id')
-  .get(getGpsByID)
+  .get(getGpByID)
   .delete(deleteGpByID)
   .all(handle405);
 
