@@ -44,9 +44,21 @@ describe('/', function () {
     describe.only('/surgeries/:surgery_id', function () {
         it('GET 200 returns surgery by surgery_id', function () {
             return request.get('/api/surgeries/1').expect(200).then(function (res) {
-                console.log(res.body.surgery[0].surgery_name);
-                expect(res.body.surgery[0].surgery_name).to.equal('the ranch surgery');
+                expect(res.body.surgery.surgery_name).to.equal('the ranch surgery');
+            });
+        });
+        it('PATCH / responds with status 200 and patched surgery', function () {
+            var surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' };
+            return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then(function (res) {
+                console.log(res.body);
+                expect(res.body.surgery.surgery_address).to.equal('new surgery address');
             });
         });
     });
 });
+// it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', () => {
+//   const ailmentUpdate = { ailment_type: '', ailment_name: '', ailment_description: '', image: '', prescription: '', treatment_plan: 'one pill every other day' };
+//   return request.patch('/api/ailments/1').send(ailmentUpdate).expect(200).then((res: any) => {
+//     expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
+//   })
+// });
