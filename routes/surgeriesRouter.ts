@@ -7,6 +7,6 @@ import { handle405 } from '../errors/errors';
 surgeriesRouter.route('/')
 .get(getSurgeries)
 .post(postSurgery)
-// .all(handle405);
+.all(handle405);
 
 export default surgeriesRouter;
