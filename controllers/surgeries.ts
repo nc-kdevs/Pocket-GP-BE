@@ -1,4 +1,4 @@
-import { fetchSurgeries, addSurgery, fetchSurgeryByID, updateSurgery } from '../models/surgeries.js';
+import { fetchSurgeries, addSurgery, fetchSurgeryByID, updateSurgery, deleteSurgery } from '../models/surgeries.js';
 import { Request, Response, NextFunction } from 'express';
 
 export const getSurgeries = (req: Request, res: Response, next: NextFunction) => {
@@ -19,8 +19,8 @@ export const postSurgery = (req: Request, res: Response, next: NextFunction) => 
 }
 
 export const getSurgeryByID = (req: Request, res: Response, next: NextFunction) => {
-  const surgeryID: number = req.params.surgery_id;
-  fetchSurgeryByID(surgeryID)
+  const surgery_id: number = req.params.surgery_id;
+  fetchSurgeryByID(surgery_id)
     .then(([surgery]) => {
       res.status(200).send({surgery})
     })
@@ -36,3 +36,12 @@ export const patchSurgeryByID = (req: Request, res: Response, next: NextFunction
     })
     .catch(next)
 }
+
+export const deleteSurgeryByID = (req: Request, res: Response, next: NextFunction) => {
+  const surgery_id: number = req.params.surgery_id;
+  deleteSurgery(surgery_id)
+    .then(() => {
+      res.sendStatus(204)
+    })
+    .catch(next)
+};

@@ -58,6 +58,7 @@ describe('/', () => {
         expect(res.body.surgery.surgery_address).to.equal('new surgery address')
       })
     })
+    it('DELETE / responds with status 204 and no-content', () => request.delete('/api/surgeries/1').expect(204));
   })
 });
 

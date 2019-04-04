@@ -10,6 +10,6 @@ surgeriesRouter.route('/')
     .all(errors_1.handle405);
 surgeriesRouter.route('/:surgery_id')
     .get(surgeries_js_1.getSurgeryByID)
-    .patch(surgeries_js_1.patchSurgeryByID)
+    .patch(surgeries_js_1.patchSurgeryByID)["delete"](surgeries_js_1.deleteSurgeryByID)
     .all(errors_1.handle405);
 exports["default"] = surgeriesRouter;

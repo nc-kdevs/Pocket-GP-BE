@@ -15,8 +15,8 @@ exports.postSurgery = function (req, res, next) {
     })["catch"](next);
 };
 exports.getSurgeryByID = function (req, res, next) {
-    var surgeryID = req.params.surgery_id;
-    surgeries_js_1.fetchSurgeryByID(surgeryID)
+    var surgery_id = req.params.surgery_id;
+    surgeries_js_1.fetchSurgeryByID(surgery_id)
         .then(function (_a) {
         var surgery = _a[0];
         res.status(200).send({ surgery: surgery });
@@ -31,13 +31,10 @@ exports.patchSurgeryByID = function (req, res, next) {
         res.status(200).send({ surgery: surgery });
     })["catch"](next);
 };
-// export const patchAilmentData = (req: Request, res: Response, next: NextFunction) => {
-//   const { ailment_id } = req.params;
-//   const { ailment_type, ailment_name, ailment_description, image, prescription, treatment_plan } = req.body;
-//   updateAilment(ailment_id, req.body)
-//     .then(([ailment]) => {
-//       console.log(ailment)
-//       res.status(200).send({ ailment });
-//     })
-//     .catch(next);
-// }
+exports.deleteSurgeryByID = function (req, res, next) {
+    var surgery_id = req.params.surgery_id;
+    surgeries_js_1.deleteSurgery(surgery_id)
+        .then(function () {
+        res.sendStatus(204);
+    })["catch"](next);
+};

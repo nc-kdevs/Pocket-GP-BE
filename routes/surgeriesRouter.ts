@@ -1,6 +1,6 @@
 import * as express from 'express';
 const surgeriesRouter = express.Router();
-import { getSurgeries, postSurgery, getSurgeryByID, patchSurgeryByID } from '../controllers/surgeries.js';
+import { getSurgeries, postSurgery, getSurgeryByID, patchSurgeryByID, deleteSurgeryByID } from '../controllers/surgeries.js';
 import app = require('../app.js');
 import { handle405 } from '../errors/errors';
 
@@ -12,6 +12,7 @@ surgeriesRouter.route('/')
 surgeriesRouter.route('/:surgery_id')
 .get(getSurgeryByID)
 .patch(patchSurgeryByID)
+.delete(deleteSurgeryByID)
 .all(handle405)
 
 export default surgeriesRouter;

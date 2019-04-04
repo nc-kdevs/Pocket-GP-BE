@@ -54,11 +54,6 @@ describe('/', function () {
                 expect(res.body.surgery.surgery_address).to.equal('new surgery address');
             });
         });
+        it('DELETE / responds with status 204 and no-content', function () { return request["delete"]('/api/surgeries/1').expect(204); });
     });
 });
-// it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', () => {
-//   const ailmentUpdate = { ailment_type: '', ailment_name: '', ailment_description: '', image: '', prescription: '', treatment_plan: 'one pill every other day' };
-//   return request.patch('/api/ailments/1').send(ailmentUpdate).expect(200).then((res: any) => {
-//     expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
-//   })
-// });
