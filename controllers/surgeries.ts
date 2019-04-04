@@ -12,7 +12,7 @@ export const getSurgeries = (req: Request, res: Response, next: NextFunction) =>
 export const postSurgery = (req: Request, res: Response, next: NextFunction) => {
   const newSurgery: object = req.body;
   addSurgery(newSurgery)
-    .then((surgery) => {
+    .then(([surgery]) => {
       return res.status(201).send({surgery})
     })
     .catch(next)

@@ -16,7 +16,6 @@ exports.postGp = function (req, res, next) {
     gps_js_1.addGp(gp)
         .then(function (_a) {
         var newGp = _a[0];
-        console.log(newGp);
         res.status(201).send({ gp: newGp });
     })["catch"](next);
 };
@@ -25,7 +24,6 @@ exports.getGpByID = function (req, res, next) {
     gps_js_1.fetchGpById(gp_id)
         .then(function (_a) {
         var gp = _a[0];
-        console.log(gp);
         if (!gp)
             return Promise.reject({ code: '22001' });
         return res.status(200).send({ gp: gp });

@@ -87,7 +87,7 @@ describe('/', () => {
           expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address')
         })
     })
-    xit('POST / responds with status 400 - Invalid Body', () => {
+    it('POST / responds with status 400 - Invalid Body', () => {
       const newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
       return request
         .post('/api/surgeries')
@@ -97,7 +97,7 @@ describe('/', () => {
           expect(res.body.message).to.equal('Invalid Request')
         })
     });
-    it('DELETE / responds with status 405 - Invalid Method', () => {
+    xit('DELETE / responds with status 405 - Invalid Method', () => {
       return request
         .delete('/api/surgeries')
         .expect(405)
@@ -106,7 +106,7 @@ describe('/', () => {
         })
     });
   });
-  describe.only('/ailments', () => {
+  describe('/ailments', () => {
     it('GET 200 /ailments/:ailment_id returns data for a single ailment', () => {
       return request.get('/api/ailments/1').expect(200).then((res: any) => {
         expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
@@ -122,7 +122,7 @@ describe('/', () => {
       return request.delete('/api/ailments/1').expect(204);
     });
   });
-  describe.only('/surgeries/:surgery_id', () => {
+  describe('/surgeries/:surgery_id', () => {
     it('GET 200 returns surgery by surgery_id', () => {
       return request.get('/api/surgeries/1').expect(200).then((res: any) => {
         expect(res.body.surgery.surgery_name).to.equal('the ranch surgery')
@@ -131,7 +131,6 @@ describe('/', () => {
     it('PATCH / responds with status 200 and patched surgery', () => {
       const surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' }
       return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then((res: any) => {
-        console.log(res.body)
         expect(res.body.surgery.surgery_address).to.equal('new surgery address')
       })
     })

@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 process.env.NODE_ENV = 'test';
 var expect = require('chai').expect;
 var supertest = require('supertest');
@@ -82,7 +80,7 @@ describe('/', function () {
                 expect(res.body.message).to.equal('Invalid Request');
             });
         });
-        it('DELETE / responds with status 405 - Invalid Method', function () {
+        xit('DELETE / responds with status 405 - Invalid Method', function () {
             return request["delete"]('/api/surgeries')
                 .expect(405)
                 .then(function (res) {
@@ -90,20 +88,6 @@ describe('/', function () {
             });
         });
     });
-    describe('/surgeries/:surgery_id', function () {
-        it('GET 200 returns surgery by surgery_id', function () {
-            return request.get('/api/surgeries/1').expect(200).then(function (res) {
-                expect(res.body.surgery.surgery_name).to.equal('the ranch surgery');
-            });
-        });
-        it('PATCH / responds with status 200 and patched surgery', function () {
-            var surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' };
-            return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then(function (res) {
-                console.log(res.body);
-                expect(res.body.surgery.surgery_address).to.equal('new surgery address');
-            });
-        });
-        it('DELETE / responds with status 204 and no-content', function () { return request["delete"]('/api/surgeries/1').expect(204); });
     describe('/ailments', function () {
         it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
             return request.get('/api/ailments/1').expect(200).then(function (res) {
@@ -119,5 +103,19 @@ describe('/', function () {
         it('DELETE 204 /ailments/:ailment_id deletes ailment from the database', function () {
             return request["delete"]('/api/ailments/1').expect(204);
         });
+    });
+    describe('/surgeries/:surgery_id', function () {
+        it('GET 200 returns surgery by surgery_id', function () {
+            return request.get('/api/surgeries/1').expect(200).then(function (res) {
+                expect(res.body.surgery.surgery_name).to.equal('the ranch surgery');
+            });
+        });
+        it('PATCH / responds with status 200 and patched surgery', function () {
+            var surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' };
+            return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then(function (res) {
+                expect(res.body.surgery.surgery_address).to.equal('new surgery address');
+            });
+        });
+        it('DELETE / responds with status 204 and no-content', function () { return request["delete"]('/api/surgeries/1').expect(204); });
     });
 });

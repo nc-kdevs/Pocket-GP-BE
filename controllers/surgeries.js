@@ -10,7 +10,8 @@ exports.getSurgeries = function (req, res, next) {
 exports.postSurgery = function (req, res, next) {
     var newSurgery = req.body;
     surgeries_js_1.addSurgery(newSurgery)
-        .then(function (surgery) {
+        .then(function (_a) {
+        var surgery = _a[0];
         return res.status(201).send({ surgery: surgery });
     })["catch"](next);
 };
