@@ -3,14 +3,14 @@ exports.seed = function (knex, Promise) { return knex.migrate
     .rollback()
     .then(function () { return knex.migrate.latest(); })
     .then(function () {
-        return knex('surgeries').insert(surgeryData).returning('*');
-    })
+    return knex('surgeries').insert(surgeryData).returning('*');
+})
     .then(function () {
-        return knex('gps').insert(gpsData).returning('*');
-    })
+    return knex('gps').insert(gpsData).returning('*');
+})
     .then(function () {
-        return knex('patients').insert(patientsData).returning('*');
-    })
+    return knex('patients').insert(patientsData).returning('*');
+})
     .then(function () {
-        return knex('ailments').insert(ailmentsData).returning('*');
-    }); };
+    return knex('ailments').insert(ailmentsData).returning('*');
+}); };
