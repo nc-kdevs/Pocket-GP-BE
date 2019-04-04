@@ -51,4 +51,11 @@ describe('/', () => {
         })
     });
   });
+  describe.only('/ailments', () => {
+    it('GET 200 /ailments/:ailment_id returns data for a single ailment', () => {
+      return request.get('/api/ailments/1').expect(200).then((res: any) => {
+        expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
+      })
+    });
+  });
 });
