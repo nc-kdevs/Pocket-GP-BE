@@ -12,3 +12,10 @@ export const addGp = (gp: object) => {
     .insert(gp)
     .returning('*');
 }
+
+export const fetchGpById = (gp_id: Number) => {
+  return connection
+    .select('*')
+    .from('gps')
+    .where('gp_id', gp_id)
+}

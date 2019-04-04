@@ -1,4 +1,4 @@
-import { fetchGps, addGp } from '../models/gps.js';
+import { fetchGps, addGp, fetchGpById } from '../models/gps.js';
 import { Request, Response, NextFunction } from 'express';
 
 export const getGps = (req: Request, res: Response, next: NextFunction) => {
@@ -19,11 +19,18 @@ export const postGp = (req: Request, res: Response, next: NextFunction) => {
       console.log(newGp)
       res.status(201).send({ gp: newGp })
     })
-  .catch(next)
+    .catch(next)
 }
 
 export const getGpByID = (req: Request, res: Response, next: NextFunction) => {
-
+  const { gp_id } = req.params;
+  fetchGpById(gp_id)
+    .then(([gp]) => {
+      console.log(gp)
+      if (!gp) return Promise.reject({ code: '22001' });
+      return res.status(200).send({ gp });
+    })
+    .catch(next);
 }
 
 export const deleteGpByID = (req: Request, res: Response, next: NextFunction) => {

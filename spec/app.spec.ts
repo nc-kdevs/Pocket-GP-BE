@@ -37,7 +37,7 @@ describe('/', () => {
         )
       });
     });
-    it.only('POST:200 returns new posted gp', () => {
+    it('POST:200 returns new posted gp', () => {
       const newGp = {
         gp_name: 'Fantastic Dr Fox',
         surgery_id: 1
@@ -60,7 +60,7 @@ describe('/', () => {
         .get('/api/gps/2')
         .expect(200)
         .then((res: any) => {
-          expect(res.body.gps[0].gp_name).to.equal('Madame Pomfrey')
+          expect(res.body.gp.gp_name).to.equal('Madame Pomfrey')
       })
     });
     });

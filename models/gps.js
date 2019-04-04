@@ -12,3 +12,9 @@ exports.addGp = function (gp) {
         .insert(gp)
         .returning('*');
 };
+exports.fetchGpById = function (gp_id) {
+    return connection
+        .select('*')
+        .from('gps')
+        .where('gp_id', gp_id);
+};

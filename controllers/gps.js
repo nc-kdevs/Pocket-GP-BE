@@ -21,6 +21,15 @@ exports.postGp = function (req, res, next) {
     })["catch"](next);
 };
 exports.getGpByID = function (req, res, next) {
+    var gp_id = req.params.gp_id;
+    gps_js_1.fetchGpById(gp_id)
+        .then(function (_a) {
+        var gp = _a[0];
+        console.log(gp);
+        if (!gp)
+            return Promise.reject({ code: '22001' });
+        return res.status(200).send({ gp: gp });
+    })["catch"](next);
 };
 exports.deleteGpByID = function (req, res, next) {
 };
