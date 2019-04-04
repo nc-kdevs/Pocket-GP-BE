@@ -18,3 +18,8 @@ exports.fetchGpById = function (gp_id) {
         .from('gps')
         .where('gp_id', gp_id);
 };
+exports.removeGp = function (gp_id) {
+    return connection('gps')
+        .del()
+        .where('gp_id', gp_id);
+};

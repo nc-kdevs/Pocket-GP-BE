@@ -19,3 +19,9 @@ export const fetchGpById = (gp_id: Number) => {
     .from('gps')
     .where('gp_id', gp_id)
 }
+
+export const removeGp = (gp_id: Number) => {
+  return connection('gps')
+    .del()
+    .where('gp_id', gp_id);
+}

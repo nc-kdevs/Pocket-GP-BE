@@ -55,14 +55,19 @@ describe('/', () => {
       });
     });
     describe('/:gps', () => {
-      it.only('GET:200 returns gp by id', () => {
+      it('GET:200 returns gp by id', () => {
         return request
         .get('/api/gps/2')
         .expect(200)
         .then((res: any) => {
           expect(res.body.gp.gp_name).to.equal('Madame Pomfrey')
       })
-    });
+      });
+      it('DEL: delete gp by id', () => {
+        return request
+          .delete('/api/gps/2')
+          .expect(204)
+      })
     });
   });
   describe('/patients', () => {

@@ -1,4 +1,4 @@
-import { fetchGps, addGp, fetchGpById } from '../models/gps.js';
+import { fetchGps, addGp, fetchGpById, removeGp } from '../models/gps.js';
 import { Request, Response, NextFunction } from 'express';
 
 export const getGps = (req: Request, res: Response, next: NextFunction) => {
@@ -34,5 +34,11 @@ export const getGpByID = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export const deleteGpByID = (req: Request, res: Response, next: NextFunction) => {
-
+  const { gp_id } = req.params;
+  removeGp(gp_id)
+    .then((deletedGp) => {
+      if (deletedGp === 1) res.sendStatus(204);
+      else res.status(404).send({ status: 404, msg: 'Not found' });
+    })
+    .catch(next);
 }

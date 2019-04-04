@@ -32,4 +32,12 @@ exports.getGpByID = function (req, res, next) {
     })["catch"](next);
 };
 exports.deleteGpByID = function (req, res, next) {
+    var gp_id = req.params.gp_id;
+    gps_js_1.removeGp(gp_id)
+        .then(function (deletedGp) {
+        if (deletedGp === 1)
+            res.sendStatus(204);
+        else
+            res.status(404).send({ status: 404, msg: 'Not found' });
+    })["catch"](next);
 };

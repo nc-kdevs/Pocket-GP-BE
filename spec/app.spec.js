@@ -40,13 +40,17 @@ describe('/', function () {
             });
         });
         describe('/:gps', function () {
-            it.only('GET:200 returns gp by id', function () {
+            it('GET:200 returns gp by id', function () {
                 return request
                     .get('/api/gps/2')
                     .expect(200)
                     .then(function (res) {
                     expect(res.body.gp.gp_name).to.equal('Madame Pomfrey');
                 });
+            });
+            it('DEL: delete gp by id', function () {
+                return request["delete"]('/api/gps/2')
+                    .expect(204);
             });
         });
     });
