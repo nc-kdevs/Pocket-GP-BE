@@ -30,3 +30,4 @@ exports.deleteAilmentData = function (req, res, next) {
             next({ status: 404 });
     })["catch"](next);
 };
+
