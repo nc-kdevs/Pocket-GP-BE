@@ -7,3 +7,6 @@ exports.fetchSurgeries = function () {
 exports.addSurgery = function (newSurgery) {
     return connection.insert(newSurgery).into('surgeries').returning('*');
 };
+exports.fetchSurgeryByID = function (surgeryID) {
+    return connection.select('*').groupBy('surgeries.surgery_id').from('surgeries').where('surgeries.surgery_id', '=', surgeryID).returning('*');
+};

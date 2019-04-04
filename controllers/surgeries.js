@@ -15,3 +15,10 @@ exports.postSurgery = function (req, res, next) {
         return res.status(201).send({ surgery: surgery });
     })["catch"](next);
 };
+exports.getSurgeryByID = function (req, res, next) {
+    var surgeryID = req.params.surgery_id;
+    surgeries_js_1.fetchSurgeryByID(surgeryID)
+        .then(function (surgery) {
+        res.status(200).send({ surgery: surgery });
+    })["catch"](next);
+};

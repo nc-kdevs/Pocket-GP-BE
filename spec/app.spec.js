@@ -17,7 +17,7 @@ describe('/', function () {
     });
     describe('/patients', function () {
     });
-    describe.only('/surgeries', function () {
+    describe('/surgeries', function () {
         it('GET 200 returns a list of all the surgeries', function () {
             return request.get('/api/surgeries').expect(200).then(function (res) {
                 expect(res.body.surgeries[0]).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
@@ -29,7 +29,7 @@ describe('/', function () {
                 expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
             });
         });
-        it('POST / responds with status 400 - Invalid Body', function () {
+        xit('POST / responds with status 400 - Invalid Body', function () {
             var newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
             return request.post('/api/surgeries').send(newSurgery).expect(400).then(function (res) {
                 expect(res.body.message).to.equal('Invalid Request');
@@ -38,6 +38,14 @@ describe('/', function () {
         xit('DELETE / responds with status 405 - Invalid Method', function () {
             return request["delete"]('/api/surgeries').expect(405).then(function (res) {
                 expect(res.body.msg).to.equal('Method Not Allowed');
+            });
+        });
+    });
+    describe.only('/surgeries/:surgery_id', function () {
+        it('GET 200 returns surgery by surgery_id', function () {
+            return request.get('/api/surgeries/1').expect(200).then(function (res) {
+                console.log(res.body.surgery[0].surgery_name);
+                expect(res.body.surgery[0].surgery_name).to.equal('the ranch surgery');
             });
         });
     });
