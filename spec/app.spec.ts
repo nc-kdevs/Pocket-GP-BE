@@ -3,14 +3,17 @@ process.env.NODE_ENV = 'test';
 const { expect } = require('chai');
 const supertest = require('supertest');
 const connection = require('../db/connection.js');
-const appTest = require('../app.js');
-import { Response } from 'express';
-
+const appTest = require('../app');
+import { Request, Response } from 'express';
 
 const request = supertest(appTest);
+// console.log(appTest)
 
 describe('/', () => {
-  beforeEach(() => connection.seed.run());
+  beforeEach(() => {
+    console.log(appTest.listeners());
+    return connection.seed.run()
+  });
   after(() => connection.destroy());
   describe('/gps', () => {
 
