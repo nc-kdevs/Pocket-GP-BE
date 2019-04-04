@@ -9,4 +9,6 @@ patientsRouter.route('/:username')
 patientsRouter.route('/')
     .get(patients_js_1.getAllPatients)
     .post(patients_js_1.postPatient);
+patientsRouter.route('/:username/ailments')
+    .get(patients_js_1.fetchUserAilments);
 exports["default"] = patientsRouter;

@@ -1,4 +1,4 @@
-import {fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient} from '../models/patients.js';
+import {fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient,getUserAilments} from '../models/patients.js';
 import {Request, Response, NextFunction} from 'express';
 
 export const getPatientByUsername = (req: Request, res: Response, next: NextFunction) => {
@@ -46,4 +46,13 @@ export const postPatient = (req: Request, res: Response, next: NextFunction) => 
 		return res.status(201).send({patient})
 	})
 	.catch(next)
+}
+
+export const fetchUserAilments = (req: Request, res: Response, next: NextFunction) => {
+  const {username} = req.params;
+  getUserAilments(username)
+      .then((ailments: object[]) => {
+          return res.status(200).send({ailments})
+      })
+      .catch(next)
 }

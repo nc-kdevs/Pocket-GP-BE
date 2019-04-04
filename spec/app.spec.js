@@ -15,7 +15,7 @@ describe('/', function () {
     after(function () { return connection.destroy(); });
     describe('/gps', function () {
     });
-    describe.only('/patients', function () {
+    describe('/patients', function () {
         it('GET 200 /username returns a single patients data', function () {
             return request.get('/api/patients/billybob22').expect(200).then(function (_a) {
                 var body = _a.body;
@@ -37,10 +37,18 @@ describe('/', function () {
                 expect(body.patients).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
             });
         });
-        it.only('POST 201 return a posted patient', function () {
+        it('POST 201 return a posted patient', function () {
             var newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname', telephone: '07122345345', email: 'newpatient@gmail.com', address: '12 new patient M53LA', surgery_id: '1', emerg_contact: '07565637432', general_med: 'paracetamol,lanzoprozel' };
             return request.post('/api/patients').send(newPatient).expect(201).then(function (res) {
                 expect(res.body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
+            });
+        });
+    });
+    describe.only('/patients/:username/ailments', function () {
+        it.only('GET 200 returns ailments by patient username', function () {
+            return request.get('/api/patients/spike/ailments').expect(200).then(function (res) {
+                console.log(res.body);
+                expect(res.body.ailments[0].ailment_type).to.equal('diabetic');
             });
         });
     });

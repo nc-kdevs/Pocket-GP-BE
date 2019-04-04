@@ -32,3 +32,11 @@ export const getPatients = ({surgery_id}) => {
 export const addPatient = (newPatient: object) => {
 	return connection.insert(newPatient).into('patients').returning('*');
 }
+
+export const getUserAilments = (username: string) => {
+  return connection
+      .select('*')
+      .from('ailments')
+      .where('patient_username', username)
+}
+

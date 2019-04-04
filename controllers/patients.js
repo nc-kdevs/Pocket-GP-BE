@@ -44,3 +44,10 @@ exports.postPatient = function (req, res, next) {
         return res.status(201).send({ patient: patient });
     })["catch"](next);
 };
+exports.fetchUserAilments = function (req, res, next) {
+    var username = req.params.username;
+    patients_js_1.getUserAilments(username)
+        .then(function (ailments) {
+        return res.status(200).send({ ailments: ailments });
+    })["catch"](next);
+};

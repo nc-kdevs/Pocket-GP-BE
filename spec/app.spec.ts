@@ -18,7 +18,7 @@ describe('/', () => {
   describe('/gps', () => {
 
   });
-  describe.only('/patients', () => {
+  describe('/patients', () => {
     it('GET 200 /username returns a single patients data', () => {
       return request.get('/api/patients/billybob22').expect(200).then(({body}:any) => {
         expect(body.patient).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
@@ -38,13 +38,21 @@ describe('/', () => {
         expect(body.patients).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
       })
     })
-    it.only('POST 201 return a posted patient', () => {
+    it('POST 201 return a posted patient', () => {
       const newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname',telephone:'07122345345',email:'newpatient@gmail.com',address:'12 new patient M53LA',surgery_id:'1',emerg_contact:'07565637432',general_med: 'paracetamol,lanzoprozel'}
       return request.post('/api/patients').send(newPatient).expect(201).then((res: any) => {
         expect(res.body.patient).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
       })
     })
   });
+
+  describe.only('/patients/:username/ailments', () => {
+    it.only('GET 200 returns ailments by patient username', () => {
+      return request.get('/api/patients/spike/ailments').expect(200).then((res: any) => {
+        expect(res.body.ailments[0].ailment_type).to.equal('diabetic')
+        })
+      })
+    });
 
   describe('/surgeries', () => {
     it('GET 200 returns a list of all the surgeries', () => {

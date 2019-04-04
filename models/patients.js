@@ -42,3 +42,9 @@ exports.getPatients = function (_a) {
 exports.addPatient = function (newPatient) {
     return connection.insert(newPatient).into('patients').returning('*');
 };
+exports.getUserAilments = function (username) {
+    return connection
+        .select('*')
+        .from('ailments')
+        .where('patient_username', username);
+};
