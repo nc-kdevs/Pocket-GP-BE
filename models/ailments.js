@@ -21,3 +21,6 @@ exports.updateAilment = function (ailment_id, _a) {
         updateObj.treatment_plan = treatment_plan;
     return connection('ailments').where({ ailment_id: ailment_id }).update(updateObj).returning('*');
 };
+exports.deleteAilment = function (ailment_id) {
+    return connection('ailments').where({ ailment_id: ailment_id }).del();
+};
