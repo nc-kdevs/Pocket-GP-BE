@@ -45,4 +45,17 @@ describe('/', function () {
             });
         });
     });
+    describe.only('/ailments', function () {
+        it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
+            return request.get('/api/ailments/1').expect(200).then(function (res) {
+                expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
+            });
+        });
+        it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', function () {
+            var ailmentUpdate = { ailment_type: '', ailment_name: '', ailment_description: '', image: '', prescription: '', treatment_plan: 'one pill every other day' };
+            return request.patch('/api/ailments/1').send(ailmentUpdate).expect(200).then(function (res) {
+                expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
+            });
+        });
+    });
 });

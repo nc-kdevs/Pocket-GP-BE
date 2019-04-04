@@ -1,8 +1,9 @@
 import * as express from 'express';
-import { getAilmentData } from '../controllers/ailments';
+import { getAilmentData, patchAilmentData } from '../controllers/ailments';
 const ailmentsRouter = express.Router();
 
 ailmentsRouter.route('/:ailment_id')
-  .get(getAilmentData);
+  .get(getAilmentData)
+  .patch(patchAilmentData);
 
 export default ailmentsRouter;
