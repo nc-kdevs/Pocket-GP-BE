@@ -14,3 +14,7 @@ export const updateAilment = (ailment_id: number, { ailment_type, ailment_name, 
   if (treatment_plan) updateObj.treatment_plan = treatment_plan;
   return connection('ailments').where({ ailment_id }).update(updateObj).returning('*');
 }
+
+export const deleteAilment = (ailment_id: number) => {
+  return connection('ailments').where({ ailment_id }).del();
+}

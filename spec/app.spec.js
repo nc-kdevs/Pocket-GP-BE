@@ -102,5 +102,8 @@ describe('/', function () {
                 expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
             });
         });
+        it.only('DELETE 204 /ailments/:ailment_id deletes ailment from the database', function () {
+            return request["delete"]('/api/ailments/1').expect(204);
+        });
     });
 });
