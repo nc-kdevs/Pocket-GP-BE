@@ -87,7 +87,7 @@ describe('/', () => {
           expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address')
         })
     })
-    it('POST / responds with status 400 - Invalid Body', () => {
+    xit('POST / responds with status 400 - Invalid Body', () => {
       const newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
       return request
         .post('/api/surgeries')
@@ -122,4 +122,20 @@ describe('/', () => {
       return request.delete('/api/ailments/1').expect(204);
     });
   });
+  describe.only('/surgeries/:surgery_id', () => {
+    it('GET 200 returns surgery by surgery_id', () => {
+      return request.get('/api/surgeries/1').expect(200).then((res: any) => {
+        expect(res.body.surgery.surgery_name).to.equal('the ranch surgery')
+      })
+    })
+    it('PATCH / responds with status 200 and patched surgery', () => {
+      const surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' }
+      return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then((res: any) => {
+        console.log(res.body)
+        expect(res.body.surgery.surgery_address).to.equal('new surgery address')
+      })
+    })
+    it('DELETE / responds with status 204 and no-content', () => request.delete('/api/surgeries/1').expect(204));
+  })
 });
+

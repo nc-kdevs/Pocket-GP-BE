@@ -90,7 +90,21 @@ describe('/', function () {
             });
         });
     });
-    describe.only('/ailments', function () {
+    describe('/surgeries/:surgery_id', function () {
+        it('GET 200 returns surgery by surgery_id', function () {
+            return request.get('/api/surgeries/1').expect(200).then(function (res) {
+                expect(res.body.surgery.surgery_name).to.equal('the ranch surgery');
+            });
+        });
+        it('PATCH / responds with status 200 and patched surgery', function () {
+            var surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' };
+            return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then(function (res) {
+                console.log(res.body);
+                expect(res.body.surgery.surgery_address).to.equal('new surgery address');
+            });
+        });
+        it('DELETE / responds with status 204 and no-content', function () { return request["delete"]('/api/surgeries/1').expect(204); });
+    describe('/ailments', function () {
         it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
             return request.get('/api/ailments/1').expect(200).then(function (res) {
                 expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
@@ -102,7 +116,7 @@ describe('/', function () {
                 expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
             });
         });
-        it.only('DELETE 204 /ailments/:ailment_id deletes ailment from the database', function () {
+        it('DELETE 204 /ailments/:ailment_id deletes ailment from the database', function () {
             return request["delete"]('/api/ailments/1').expect(204);
         });
     });
