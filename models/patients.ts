@@ -28,3 +28,7 @@ export const getPatients = ({surgery_id}) => {
 	if(surgery_id) queries['surgeries.surgery_id'] = surgery_id
 	return connection.select('*').from('surgeries').leftJoin('patients','surgeries.surgery_id','patients.surgery_id').where(queries);
 }
+
+export const addPatient = (newPatient: object) => {
+	return connection.insert(newPatient).into('patients').returning('*');
+}

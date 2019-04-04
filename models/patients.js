@@ -39,3 +39,6 @@ exports.getPatients = function (_a) {
         queries['surgeries.surgery_id'] = surgery_id;
     return connection.select('*').from('surgeries').leftJoin('patients', 'surgeries.surgery_id', 'patients.surgery_id').where(queries);
 };
+exports.addPatient = function (newPatient) {
+    return connection.insert(newPatient).into('patients').returning('*');
+};

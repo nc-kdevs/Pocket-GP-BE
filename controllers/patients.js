@@ -36,3 +36,11 @@ exports.getAllPatients = function (req, res, next) {
         res.status(200).send({ patients: patients });
     })["catch"](next);
 };
+exports.postPatient = function (req, res, next) {
+    var newPatient = req.body;
+    patients_js_1.addPatient(newPatient)
+        .then(function (_a) {
+        var patient = _a[0];
+        return res.status(201).send({ patient: patient });
+    })["catch"](next);
+};

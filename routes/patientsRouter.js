@@ -7,5 +7,6 @@ patientsRouter.route('/:username')
     .get(patients_js_1.getPatientByUsername)
     .patch(patients_js_1.updatePatientByUsername)["delete"](patients_js_1.deletePatientByUsername);
 patientsRouter.route('/')
-    .get(patients_js_1.getAllPatients);
+    .get(patients_js_1.getAllPatients)
+    .post(patients_js_1.postPatient);
 exports["default"] = patientsRouter;
