@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction  } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 export const handle400 = (err: any, req: Request, res: Response, next: NextFunction) => {
   const { code } = err;

@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 process.env.NODE_ENV = 'test';
 var expect = require('chai').expect;
 var supertest = require('supertest');
@@ -10,6 +8,49 @@ describe('/', function () {
     beforeEach(function () { return connection.seed.run(); });
     after(function () { return connection.destroy(); });
     describe('/gps', function () {
+        it('GET:200 returns a list of all gps', function () {
+            return request
+                .get('/api/gps')
+                .expect(200)
+                .then(function (res) {
+                expect(res.body.gps[0]).to.contain.keys('gp_id', 'gp_name', 'surgery_id');
+            });
+        });
+        it('GET:200 query of surgery_id returns gps with that surgery_id', function () {
+            return request
+                .get('/api/gps?surgery=1')
+                .expect(200)
+                .then(function (res) {
+                expect(res.body.gps[0]).to.contain.keys('gp_id', 'gp_name', 'surgery_id');
+            });
+        });
+        it('POST:200 returns new posted gp', function () {
+            var newGp = {
+                gp_name: 'Fantastic Dr Fox',
+                surgery_id: 1
+            };
+            return request
+                .post('/api/gps')
+                .send(newGp)
+                .expect(201)
+                .then(function (res) {
+                expect(res.body.gp).to.contain.keys('gp_id', 'gp_name', 'surgery_id');
+            });
+        });
+        describe('/:gps', function () {
+            it('GET:200 returns gp by id', function () {
+                return request
+                    .get('/api/gps/2')
+                    .expect(200)
+                    .then(function (res) {
+                    expect(res.body.gp.gp_name).to.equal('Madame Pomfrey');
+                });
+            });
+            it('DEL: delete gp by id', function () {
+                return request["delete"]('/api/gps/2')
+                    .expect(204);
+            });
+        });
     });
     describe('/patients', function () {
         it('GET 200 /username returns a single patients data', function () {
@@ -87,5 +128,35 @@ describe('/', function () {
                 });
             });
         });
+    });
+    describe('/ailments', function () {
+        it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
+            return request.get('/api/ailments/1').expect(200).then(function (res) {
+                expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
+            });
+        });
+        it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', function () {
+            var ailmentUpdate = { ailment_type: '', ailment_name: '', ailment_description: '', image: '', prescription: '', treatment_plan: 'one pill every other day' };
+            return request.patch('/api/ailments/1').send(ailmentUpdate).expect(200).then(function (res) {
+                expect(res.body.ailment.treatment_plan).to.equal('one pill every other day');
+            });
+        });
+        it('DELETE 204 /ailments/:ailment_id deletes ailment from the database', function () {
+            return request["delete"]('/api/ailments/1').expect(204);
+        });
+    });
+    describe('/surgeries/:surgery_id', function () {
+        it('GET 200 returns surgery by surgery_id', function () {
+            return request.get('/api/surgeries/1').expect(200).then(function (res) {
+                expect(res.body.surgery.surgery_name).to.equal('the ranch surgery');
+            });
+        });
+        it('PATCH / responds with status 200 and patched surgery', function () {
+            var surgeryPatch = { surgery_name: '', surgery_address: 'new surgery address' };
+            return request.patch('/api/surgeries/1').send(surgeryPatch).expect(200).then(function (res) {
+                expect(res.body.surgery.surgery_address).to.equal('new surgery address');
+            });
+        });
+        it('DELETE / responds with status 204 and no-content', function () { return request["delete"]('/api/surgeries/1').expect(204); });
     });
 });
