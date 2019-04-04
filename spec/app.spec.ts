@@ -52,6 +52,25 @@ describe('/', () => {
         expect(res.body.ailments[0].ailment_type).to.equal('diabetic')
         })
       })
+      it.only('POST / 201 returns new posted user ailment', () => {
+        const ailmentObj = {
+          ailment_type: 'new ail',
+          ailment_name: 'new ail name',
+          ailment_description: 'new ail desc',
+        }
+        return request
+        .post('/api/patients/spike/ailments')
+        .send(ailmentObj)
+        .expect(201)
+        .then((res: any) => {
+          expect(res.body.ailment).to.contain.keys(
+            'ailment_type',
+            'ailment_name',
+            'ailment_description',
+            'ailment_id',
+            'patient_username'
+          )
+        });
     });
 
   describe('/surgeries', () => {
@@ -78,4 +97,5 @@ describe('/', () => {
       })
     });
   });
+});
 });

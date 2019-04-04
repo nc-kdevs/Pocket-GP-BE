@@ -47,32 +47,45 @@ describe('/', function () {
     describe.only('/patients/:username/ailments', function () {
         it.only('GET 200 returns ailments by patient username', function () {
             return request.get('/api/patients/spike/ailments').expect(200).then(function (res) {
-                console.log(res.body);
                 expect(res.body.ailments[0].ailment_type).to.equal('diabetic');
             });
         });
-    });
-    describe('/surgeries', function () {
-        it('GET 200 returns a list of all the surgeries', function () {
-            return request.get('/api/surgeries').expect(200).then(function (res) {
-                expect(res.body.surgeries[0]).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
+        it.only('POST / 201 returns new posted user ailment', function () {
+            var ailmentObj = {
+                ailment_type: 'new ail',
+                ailment_name: 'new ail name',
+                ailment_description: 'new ail desc'
+            };
+            return request
+                .post('/api/patients/spike/ailments')
+                .send(ailmentObj)
+                .expect(201)
+                .then(function (res) {
+                expect(res.body.ailment).to.contain.keys('ailment_type', 'ailment_name', 'ailment_description', 'ailment_id', 'patient_username');
             });
         });
-        it('POST 201 return a posted surgery', function () {
-            var newSurgery = { surgery_name: 'New Surgery', surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
-            return request.post('/api/surgeries').send(newSurgery).expect(201).then(function (res) {
-                expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
+        describe('/surgeries', function () {
+            it('GET 200 returns a list of all the surgeries', function () {
+                return request.get('/api/surgeries').expect(200).then(function (res) {
+                    expect(res.body.surgeries[0]).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
+                });
             });
-        });
-        it('POST / responds with status 400 - Invalid Body', function () {
-            var newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
-            return request.post('/api/surgeries').send(newSurgery).expect(400).then(function (res) {
-                expect(res.body.message).to.equal('Invalid Request');
+            it('POST 201 return a posted surgery', function () {
+                var newSurgery = { surgery_name: 'New Surgery', surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
+                return request.post('/api/surgeries').send(newSurgery).expect(201).then(function (res) {
+                    expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
+                });
             });
-        });
-        it('DELETE / responds with status 405 - Invalid Method', function () {
-            return request["delete"]('/api/surgeries').expect(405).then(function (res) {
-                expect(res.body.msg).to.equal('Method Not Allowed');
+            it('POST / responds with status 400 - Invalid Body', function () {
+                var newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
+                return request.post('/api/surgeries').send(newSurgery).expect(400).then(function (res) {
+                    expect(res.body.message).to.equal('Invalid Request');
+                });
+            });
+            it('DELETE / responds with status 405 - Invalid Method', function () {
+                return request["delete"]('/api/surgeries').expect(405).then(function (res) {
+                    expect(res.body.msg).to.equal('Method Not Allowed');
+                });
             });
         });
     });

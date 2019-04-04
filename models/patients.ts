@@ -40,3 +40,8 @@ export const getUserAilments = (username: string) => {
       .where('patient_username', username)
 }
 
+export const createUserAilment = (ailmentObj: object) => {
+  return connection('ailments')
+      .insert(ailmentObj)
+      .returning('*')
+}

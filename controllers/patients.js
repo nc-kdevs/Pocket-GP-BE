@@ -51,3 +51,11 @@ exports.fetchUserAilments = function (req, res, next) {
         return res.status(200).send({ ailments: ailments });
     })["catch"](next);
 };
+exports.postUserAilment = function (req, res, next) {
+    var ailmentObj = req.body;
+    var username = req.params.username;
+    ailmentObj.patient_username = username;
+    console.log(ailmentObj);
+    patients_js_1.createUserAilment(ailmentObj)
+        .then(console.log);
+};

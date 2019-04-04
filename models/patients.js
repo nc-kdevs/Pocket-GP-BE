@@ -48,3 +48,8 @@ exports.getUserAilments = function (username) {
         .from('ailments')
         .where('patient_username', username);
 };
+exports.createUserAilment = function (ailmentObj) {
+    return connection('ailments')
+        .insert(ailmentObj)
+        .returning('*');
+};

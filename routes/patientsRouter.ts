@@ -1,6 +1,6 @@
 import * as express from 'express';
 const patientsRouter = express.Router();
-import {getPatientByUsername,updatePatientByUsername,deletePatientByUsername,getAllPatients,postPatient,fetchUserAilments} from '../controllers/patients.js'
+import {getPatientByUsername,updatePatientByUsername,deletePatientByUsername,getAllPatients,postPatient,fetchUserAilments,postUserAilment} from '../controllers/patients.js'
 import app = require('../app.js')
 import {handle405} from '../errors/errors'
 
@@ -15,5 +15,6 @@ patientsRouter.route('/')
 
 patientsRouter.route('/:username/ailments')
 .get(fetchUserAilments)
+.post(postUserAilment)
 
 export default patientsRouter;
