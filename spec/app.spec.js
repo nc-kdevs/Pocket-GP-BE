@@ -16,10 +16,16 @@ describe('/', function () {
     describe('/gps', function () {
     });
     describe.only('/patients', function () {
-        it.only('GET 200 /username returns a single patients data', function () {
+        it('GET 200 /username returns a single patients data', function () {
             return request.get('/api/patients/billybob22').expect(200).then(function (_a) {
                 var body = _a.body;
                 expect(body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
+            });
+        });
+        it.only('PATCH 200 /username update patients data and return updated patient', function () {
+            var updatePatient = { patient_username: '', patient_password: '', first_name: 'Jimmy', surname: '', telephone: '', email: '', address: '', surgery_id: '', emerg_contact: '', general_med: '' };
+            return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(function (res) {
+                expect(res.body.patient.first_name).to.equal('Jimmy');
             });
         });
     });

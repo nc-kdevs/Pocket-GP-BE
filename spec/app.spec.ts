@@ -19,9 +19,15 @@ describe('/', () => {
 
   });
   describe.only('/patients', () => {
-    it.only('GET 200 /username returns a single patients data', () => {
+    it('GET 200 /username returns a single patients data', () => {
       return request.get('/api/patients/billybob22').expect(200).then(({body}:any) => {
         expect(body.patient).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
+      })
+    })
+    it.only('PATCH 200 /username update patients data and return updated patient', () => {
+      const updatePatient = {patient_username: '', patient_password: '', first_name: 'Jimmy',surname: '',telephone: '',email: '',address: '',surgery_id: '',emerg_contact: '',general_med: ''}
+      return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(res => {
+        expect(res.body.patient.first_name).to.equal('Jimmy')
       })
     })
   });
