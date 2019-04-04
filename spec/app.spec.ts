@@ -18,10 +18,14 @@ describe('/', () => {
   describe('/gps', () => {
 
   });
-  describe('/patients', () => {
-
+  describe.only('/patients', () => {
+    it.only('GET 200 /username returns a single patients data', () => {
+      return request.get('/api/patients/billybob22').expect(200).then(({body}:any) => {
+        expect(body.patient).to.contain.keys('patient_username','patient_password','first_name','surname','telephone','email','address','surgery_id','emerg_contact','general_med')
+      })
+    })
   });
-  describe.only('/surgeries', () => {
+  describe('/surgeries', () => {
     it('GET 200 returns a list of all the surgeries', () => {
       return request.get('/api/surgeries').expect(200).then((res: any) => {
         expect(res.body.surgeries[0]).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address')
@@ -39,7 +43,7 @@ describe('/', () => {
         expect(res.body.message).to.equal('Invalid Request')
       })
     });
-    it.only('DELETE / responds with status 405 - Invalid Method', () => {
+    it('DELETE / responds with status 405 - Invalid Method', () => {
       return request.delete('/api/surgeries').expect(405).then((res: any) => {
         expect(res.body.msg).to.equal('Method Not Allowed')
       })

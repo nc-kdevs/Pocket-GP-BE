@@ -15,9 +15,15 @@ describe('/', function () {
     after(function () { return connection.destroy(); });
     describe('/gps', function () {
     });
-    describe('/patients', function () {
+    describe.only('/patients', function () {
+        it.only('GET 200 /username returns a single patients data', function () {
+            return request.get('/api/patients/billybob22').expect(200).then(function (_a) {
+                var body = _a.body;
+                expect(body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
+            });
+        });
     });
-    describe.only('/surgeries', function () {
+    describe('/surgeries', function () {
         it('GET 200 returns a list of all the surgeries', function () {
             return request.get('/api/surgeries').expect(200).then(function (res) {
                 expect(res.body.surgeries[0]).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
@@ -35,7 +41,7 @@ describe('/', function () {
                 expect(res.body.message).to.equal('Invalid Request');
             });
         });
-        it.only('DELETE / responds with status 405 - Invalid Method', function () {
+        it('DELETE / responds with status 405 - Invalid Method', function () {
             return request["delete"]('/api/surgeries').expect(405).then(function (res) {
                 expect(res.body.msg).to.equal('Method Not Allowed');
             });
