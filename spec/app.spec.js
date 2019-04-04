@@ -3,9 +3,7 @@ var expect = require('chai').expect;
 var supertest = require('supertest');
 var connection = require('../db/connection.js');
 var appTest = require('../app');
-// import { Request, Response } from 'express';
 var request = supertest(appTest);
-// console.log(appTest)
 describe('/', function () {
     beforeEach(function () { return connection.seed.run(); });
     after(function () { return connection.destroy(); });
@@ -21,7 +19,6 @@ describe('/', function () {
         });
         it('POST 201 return a posted surgery', function () {
             var newSurgery = { surgery_name: 'New Surgery', surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
-            console.log(appTest.listeners(), '<-- listeners during 2');
             return request
                 .post('/api/surgeries')
                 .send(newSurgery)
@@ -30,7 +27,7 @@ describe('/', function () {
                 expect(res.body.surgery).to.contain.keys('surgery_id', 'surgery_name', 'surgery_username', 'surgery_password', 'surgery_address');
             });
         });
-        it.only('POST / responds with status 400 - Invalid Body', function () {
+        it('POST / responds with status 400 - Invalid Body', function () {
             var newSurgery = { surgery_username: 'newSurgery', surgery_password: 'newsurgery21', surgery_address: '121 new suregery street m21 3th' };
             return request
                 .post('/api/surgeries')
