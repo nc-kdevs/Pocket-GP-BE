@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { fetchAilment, updateAilment, deleteAilment } from '../models/ailments';
+import { decrypt } from '../security/encryption.js'
 
 export const getAilmentData = (req: Request, res: Response, next: NextFunction) => {
   const { ailment_id } = req.params;
   fetchAilment(ailment_id)
     .then(([ailment]) => {
-      res.status(200).send({ ailment });
+      const decryptedAilment = decrypt(ailment)
+      console.log(decryptedAilment)
+      res.status(200).send({ ailment: decryptedAilment });
     })
     .catch(next);
 }

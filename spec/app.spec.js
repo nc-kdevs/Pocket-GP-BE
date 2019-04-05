@@ -128,11 +128,9 @@ describe('/', function () {
                 });
             });
         });
-    });
-    describe('/ailments', function () {
-        it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
+        it.only('GET 200/ ailment by ailment_id', function () {
             return request.get('/api/ailments/1').expect(200).then(function (res) {
-                expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
+                expect(res.body.ailment.ailment_description).to.eql('exam pressure, thinks everyone is out to get him');
             });
         });
         it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', function () {
