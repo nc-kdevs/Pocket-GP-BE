@@ -7,7 +7,6 @@ export const getAilmentData = (req: Request, res: Response, next: NextFunction) 
   fetchAilment(ailment_id)
     .then(([ailment]) => {
       const decryptedAilment = decrypt(ailment)
-      console.log(decryptedAilment)
       res.status(200).send({ ailment: decryptedAilment });
     })
     .catch(next);

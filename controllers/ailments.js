@@ -7,6 +7,7 @@ exports.getAilmentData = function (req, res, next) {
     ailments_1.fetchAilment(ailment_id)
         .then(function (_a) {
         var ailment = _a[0];
+        console.log(ailment);
         var decryptedAilment = encryption_js_1.decrypt(ailment);
         console.log(decryptedAilment);
         res.status(200).send({ ailment: decryptedAilment });
