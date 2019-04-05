@@ -7,7 +7,7 @@ const encKey = '12345678123456781234567812345678';
 const encrypt = (obj) => {
   const array = Object.entries(obj);
   const newArray = array.map(([key, value]) => {
-    if (typeof value === 'string') {
+    if (typeof value === 'string' && value) {
       let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
       let encrypted = cipher.update(value, 'utf-8', 'hex');
       encrypted += cipher.final('hex');

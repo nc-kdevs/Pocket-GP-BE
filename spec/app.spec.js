@@ -75,7 +75,7 @@ describe('/', function () {
             });
         });
         it('POST 201 return a posted patient', function () {
-            var newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname', telephone: '07122345345', email: 'newpatient@gmail.com', address: '12 new patient M53LA', surgery_id: '1', emerg_contact: '07565637432', general_med: 'paracetamol,lanzoprozel' };
+            var newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname', telephone: '07122345345', email: 'newpatient@gmail.com', address: '12 new patient M53LA', surgery_id: 1, emerg_contact: '07565637432', general_med: 'paracetamol,lanzoprozel' };
             return request.post('/api/patients').send(newPatient).expect(201).then(function (res) {
                 expect(res.body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
             });
@@ -128,11 +128,9 @@ describe('/', function () {
                 });
             });
         });
-    });
-    describe('/ailments', function () {
-        it('GET 200 /ailments/:ailment_id returns data for a single ailment', function () {
+        it('GET 200/ ailment by ailment_id', function () {
             return request.get('/api/ailments/1').expect(200).then(function (res) {
-                expect(res.body.ailment).to.contain.keys('patient_username', 'ailment_id', 'ailment_type', 'ailment_name', 'ailment_description', 'date', 'image', 'prescription', 'treatment_plan');
+                expect(res.body.ailment.ailment_description).to.eql('exam pressure, thinks everyone is out to get him');
             });
         });
         it('PATCH 200 /ailments/:ailment_id updates ailment data and returns the updated object', function () {
