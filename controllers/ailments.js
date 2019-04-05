@@ -7,19 +7,19 @@ exports.getAilmentData = function (req, res, next) {
     ailments_1.fetchAilment(ailment_id)
         .then(function (_a) {
         var ailment = _a[0];
-        console.log(ailment);
         var decryptedAilment = encryption_js_1.decrypt(ailment);
-        console.log(decryptedAilment);
         res.status(200).send({ ailment: decryptedAilment });
     })["catch"](next);
 };
 exports.patchAilmentData = function (req, res, next) {
     var ailment_id = req.params.ailment_id;
     var _a = req.body, ailment_type = _a.ailment_type, ailment_name = _a.ailment_name, ailment_description = _a.ailment_description, image = _a.image, prescription = _a.prescription, treatment_plan = _a.treatment_plan;
-    ailments_1.updateAilment(ailment_id, req.body)
+    var encryptedAilment = encryption_js_1.encrypt(req.body);
+    ailments_1.updateAilment(ailment_id, encryptedAilment)
         .then(function (_a) {
         var ailment = _a[0];
-        res.status(200).send({ ailment: ailment });
+        var decryptedAilment = encryption_js_1.decrypt(ailment);
+        res.status(200).send({ ailment: decryptedAilment });
     })["catch"](next);
 };
 exports.deleteAilmentData = function (req, res, next) {

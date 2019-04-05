@@ -74,9 +74,10 @@ describe('/', () => {
         expect(body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med')
       })
     })
-    it('PATCH 200 /username update patients data and return updated patient', () => {
+    it.only('PATCH 200 /username update patients data and return updated patient', () => {
       const updatePatient = { patient_username: '', patient_password: '', first_name: 'Jimmy', surname: '', telephone: '', email: '', address: '', surgery_id: '', emerg_contact: '', general_med: '' }
       return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(res => {
+        console.log(res.body)
         expect(res.body.patient.first_name).to.equal('Jimmy')
       })
     })
@@ -150,7 +151,7 @@ describe('/', () => {
         })
       });
     });
-    it.only('GET 200/ ailment by ailment_id', () => {
+    it('GET 200/ ailment by ailment_id', () => {
       return request.get('/api/ailments/1').expect(200).then((res:any) => {
         expect(res.body.ailment.ailment_description).to.eql('exam pressure, thinks everyone is out to get him')
       })

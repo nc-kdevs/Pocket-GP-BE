@@ -59,9 +59,10 @@ describe('/', function () {
                 expect(body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med');
             });
         });
-        it('PATCH 200 /username update patients data and return updated patient', function () {
+        it.only('PATCH 200 /username update patients data and return updated patient', function () {
             var updatePatient = { patient_username: '', patient_password: '', first_name: 'Jimmy', surname: '', telephone: '', email: '', address: '', surgery_id: '', emerg_contact: '', general_med: '' };
             return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(function (res) {
+                console.log(res.body);
                 expect(res.body.patient.first_name).to.equal('Jimmy');
             });
         });
@@ -128,7 +129,7 @@ describe('/', function () {
                 });
             });
         });
-        it.only('GET 200/ ailment by ailment_id', function () {
+        it('GET 200/ ailment by ailment_id', function () {
             return request.get('/api/ailments/1').expect(200).then(function (res) {
                 expect(res.body.ailment.ailment_description).to.eql('exam pressure, thinks everyone is out to get him');
             });

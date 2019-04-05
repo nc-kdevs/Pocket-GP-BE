@@ -1,21 +1,31 @@
 "use strict";
 exports.__esModule = true;
 var patients_js_1 = require("../models/patients.js");
+var encryption_js_1 = require("../security/encryption.js");
 exports.getPatientByUsername = function (req, res, next) {
     var username = req.params.username;
-    patients_js_1.fetchPatientByUsername(username)
+    var encryptedUsername = encryption_js_1.encrypt(req.params);
+    console.log(encryptedUsername, 'THIS IS THE USERNAME');
+    patients_js_1.fetchPatientByUsername(encryptedUsername.username)
         .then(function (_a) {
         var patient = _a[0];
-        res.status(200).send({ patient: patient });
+        var decryptedPatient = encryption_js_1.decrypt(patient);
+        res.status(200).send({ patient: decryptedPatient });
     })["catch"]();
 };
 exports.updatePatientByUsername = function (req, res, next) {
     var username = req.params.username;
     var _a = req.body, patient_username = _a.patient_username, patient_password = _a.patient_password, first_name = _a.first_name, surname = _a.surname, telephone = _a.telephone, email = _a.email, address = _a.address, surgery_id = _a.surgery_id, emerg_contact = _a.emerg_contact, general_med = _a.general_med;
-    patients_js_1.updatePatient(username, req.body)
+    var encryptedUsername = encryption_js_1.encrypt(req.params);
+    var encryptedPatient = encryption_js_1.encrypt(req.body);
+    console.log(encryptedPatient, 'enc patient');
+    console.log(encryptedUsername, 'enc username');
+    patients_js_1.updatePatient(encryptedUsername.username, encryptedPatient)
         .then(function (_a) {
         var patient = _a[0];
-        res.status(200).send({ patient: patient });
+        console.log(patient, 'PATIENT');
+        var decryptedPatient = encryption_js_1.decrypt(patient);
+        res.status(200).send({ patient: decryptedPatient });
     })["catch"](next);
 };
 exports.deletePatientByUsername = function (req, res, next) {

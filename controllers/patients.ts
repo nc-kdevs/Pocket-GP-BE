@@ -1,11 +1,15 @@
 import { fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient, getUserAilments, createUserAilment } from '../models/patients.js';
 import { Request, Response, NextFunction } from 'express';
+import { encrypt, decrypt } from '../security/encryption.js'
 
 export const getPatientByUsername = (req: Request, res: Response, next: NextFunction) => {
 	const { username } = req.params
-	fetchPatientByUsername(username)
+	const encryptedUsername = encrypt(req.params)
+	console.log(encryptedUsername, 'THIS IS THE USERNAME')
+	fetchPatientByUsername(encryptedUsername.username)
 		.then(([patient]) => {
-			res.status(200).send({ patient })
+			const decryptedPatient = decrypt(patient)
+			res.status(200).send({ patient: decryptedPatient })
 		})
 		.catch()
 }
@@ -13,9 +17,15 @@ export const getPatientByUsername = (req: Request, res: Response, next: NextFunc
 export const updatePatientByUsername = (req: Request, res: Response, next: NextFunction) => {
 	const { username } = req.params;
 	const { patient_username, patient_password, first_name, surname, telephone, email, address, surgery_id, emerg_contact, general_med } = req.body;
-	updatePatient(username, req.body)
+	const encryptedUsername = encrypt(req.params)
+	const encryptedPatient = encrypt(req.body)
+	console.log(encryptedPatient, 'enc patient')
+	console.log(encryptedUsername, 'enc username')
+	updatePatient(encryptedUsername.username, encryptedPatient)
 		.then(([patient]) => {
-			res.status(200).send({ patient });
+			console.log(patient, 'PATIENT')
+			const decryptedPatient = decrypt(patient)
+			res.status(200).send({ patient: decryptedPatient });
 		})
 		.catch(next)
 }
