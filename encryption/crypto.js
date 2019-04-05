@@ -7,7 +7,7 @@ let hash = crypto.createHash('md5')
     .update('some data we want to encrypt')
     .digest('hex')
 
-console.log('this is the IV ->', iv,'this is the hash ->', hash)
+// console.log('this is the IV ->', iv,'this is the hash ->', hash)
 
 //list of hashes and ciphers in crypto
 //console.log(crypto.getHashes());
@@ -28,7 +28,7 @@ let encrypted = cipher.update(secretMessage, 'utf-8', 'hex');
 //first arg is message, second is the format its passed as, third is the format to encrypt too
 encrypted += cipher.final('hex');
 
-console.log('encrypted: ' + encrypted)
+// console.log('encrypted: ' + encrypted)
 
 let decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
 //first argument is the decryption algorithm to use
@@ -36,4 +36,26 @@ let decrypted = decipher.update(encrypted, 'hex', 'utf-8');
 //first arg is encrypted message, second is the format its encrypted into, third is the format to decrypt too
 decrypted += decipher.final('utf-8');
 
-console.log('decrypted: ' + decrypted)
+// console.log('decrypted: ' + decrypted)
+
+
+
+encryptData = (data) => {
+  const encKey = '12345678123456781234567812345678';
+  let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
+  let encrypted = cipher.update(data, 'utf-8', 'hex');
+  encrypted += cipher.final('hex');
+    return encrypted
+}
+
+console.log('ENCRYPTED---->', encryptData(secretMessage))
+
+decryptData = (encrypted) => {
+  const decKey = '12345678123456781234567812345678';
+  let decipher = crypto.createDecipheriv('aes-256-cbc', decKey, iv);
+  let decrypted = decipher.update(encrypted, 'hex', 'utf-8');
+  decrypted += decipher.final('utf-8');
+    return decrypted
+}
+
+
