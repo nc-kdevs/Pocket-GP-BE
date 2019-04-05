@@ -13,5 +13,4 @@ exports.seed = function (knex, Promise) { return knex.migrate
 })
     .then(function () {
     return knex('ailments').insert(ailmentsData).returning('*');
-})
-    .then(console.log); };
+}); };

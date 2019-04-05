@@ -10,9 +10,9 @@
     "migrate-latest": "knex migrate:latest",
     "migrate-rollback": "knex migrate:rollback",
     "seed": "tsc ./db/seeds/seed.ts && knex seed:run",
-    "compile": "tsc ./*.ts && tsc ./spec/*.ts && tsc ./routes/*.ts && tsc ./controllers/*.ts && tsc ./models/*.ts",
+    "compile": "tsc ./*.ts && tsc ./spec/*.ts && tsc ./routes/*.ts && tsc ./controllers/*.ts && tsc ./models/*.ts && tsc ./errors/*.ts",
     "compile-data": "tsc ./db/data/test-data/*.ts && tsc ./db/data/development-data/*.ts",
-    "test": "mocha ./spec/",
+    "test": "npm run compile && mocha ./spec/",
     "seed:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex seed:run",
     "migrate:latest:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:latest",
     "migrate:rollback:prod": "NODE_ENV=production DB_URL=$(heroku config:get DATABASE_URL) knex migrate:rollback"
@@ -36,9 +36,11 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-standard": "^4.0.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
+    "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
     "@types/node": "^11.12.2",
     "body-parser": "^1.18.3",

@@ -1,10 +1,14 @@
-export const apiRouter = require('express').Router();
-import gpsRouter = require('./gpsRouter');
-import patientsRouter = require('./patientsRouter');
-import surgeriesRouter = require('./surgeriesRouter');
-import ailmentsRouter = require('./ailmentsRouter');
+import * as express from 'express';
+const apiRouter = express.Router();
+
+import gpsRouter from './gpsRouter';
+import patientsRouter from './patientsRouter';
+import surgeriesRouter from './surgeriesRouter';
+import ailmentsRouter from './ailmentsRouter';
 
 apiRouter.use('/gps', gpsRouter);
 apiRouter.use('/patients', patientsRouter);
 apiRouter.use('/surgeries', surgeriesRouter);
 apiRouter.use('/ailments', ailmentsRouter);
+
+export default apiRouter;
