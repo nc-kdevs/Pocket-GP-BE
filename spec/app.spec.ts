@@ -74,10 +74,9 @@ describe('/', () => {
         expect(body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med')
       })
     })
-    it.only('PATCH 200 /username update patients data and return updated patient', () => {
+    it('PATCH 200 /username update patients data and return updated patient', () => {
       const updatePatient = { patient_username: '', patient_password: '', first_name: 'Jimmy', surname: '', telephone: '', email: '', address: '', surgery_id: '', emerg_contact: '', general_med: '' }
       return request.patch('/api/patients/billybob22').send(updatePatient).expect(200).then(res => {
-        console.log(res.body)
         expect(res.body.patient.first_name).to.equal('Jimmy')
       })
     })
@@ -90,7 +89,7 @@ describe('/', () => {
       })
     })
     it('POST 201 return a posted patient', () => {
-      const newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname', telephone: '07122345345', email: 'newpatient@gmail.com', address: '12 new patient M53LA', surgery_id: '1', emerg_contact: '07565637432', general_med: 'paracetamol,lanzoprozel' }
+      const newPatient = { patient_username: 'newpatient', patient_password: 'newpatient123', first_name: 'patientfirstname', surname: 'patientsurname', telephone: '07122345345', email: 'newpatient@gmail.com', address: '12 new patient M53LA', surgery_id: 1, emerg_contact: '07565637432', general_med: 'paracetamol,lanzoprozel' }
       return request.post('/api/patients').send(newPatient).expect(201).then((res: any) => {
         expect(res.body.patient).to.contain.keys('patient_username', 'patient_password', 'first_name', 'surname', 'telephone', 'email', 'address', 'surgery_id', 'emerg_contact', 'general_med')
       })

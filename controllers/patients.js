@@ -5,7 +5,6 @@ var encryption_js_1 = require("../security/encryption.js");
 exports.getPatientByUsername = function (req, res, next) {
     var username = req.params.username;
     var encryptedUsername = encryption_js_1.encrypt(req.params);
-    console.log(encryptedUsername, 'THIS IS THE USERNAME');
     patients_js_1.fetchPatientByUsername(encryptedUsername.username)
         .then(function (_a) {
         var patient = _a[0];
@@ -18,12 +17,9 @@ exports.updatePatientByUsername = function (req, res, next) {
     var _a = req.body, patient_username = _a.patient_username, patient_password = _a.patient_password, first_name = _a.first_name, surname = _a.surname, telephone = _a.telephone, email = _a.email, address = _a.address, surgery_id = _a.surgery_id, emerg_contact = _a.emerg_contact, general_med = _a.general_med;
     var encryptedUsername = encryption_js_1.encrypt(req.params);
     var encryptedPatient = encryption_js_1.encrypt(req.body);
-    console.log(encryptedPatient, 'enc patient');
-    console.log(encryptedUsername, 'enc username');
     patients_js_1.updatePatient(encryptedUsername.username, encryptedPatient)
         .then(function (_a) {
         var patient = _a[0];
-        console.log(patient, 'PATIENT');
         var decryptedPatient = encryption_js_1.decrypt(patient);
         res.status(200).send({ patient: decryptedPatient });
     })["catch"](next);
@@ -43,31 +39,39 @@ exports.getAllPatients = function (req, res, next) {
     patients_js_1.getPatients({ surgery_id: surgery_id })
         .then(function (_a) {
         var patients = _a[0];
-        res.status(200).send({ patients: patients });
+        var decryptedPatients = encryption_js_1.decrypt(patients);
+        res.status(200).send({ patients: decryptedPatients });
     })["catch"](next);
 };
 exports.postPatient = function (req, res, next) {
     var newPatient = req.body;
-    patients_js_1.addPatient(newPatient)
+    var encryptedPatient = encryption_js_1.encrypt(req.body);
+    patients_js_1.addPatient(encryptedPatient)
         .then(function (_a) {
         var patient = _a[0];
-        return res.status(201).send({ patient: patient });
+        var decryptedPatient = encryption_js_1.decrypt(patient);
+        return res.status(201).send({ patient: decryptedPatient });
     })["catch"](next);
 };
 exports.fetchUserAilments = function (req, res, next) {
     var username = req.params.username;
-    patients_js_1.getUserAilments(username)
+    var encryptUsername = encryption_js_1.encrypt(req.params);
+    patients_js_1.getUserAilments(encryptUsername.username)
         .then(function (ailments) {
-        return res.status(200).send({ ailments: ailments });
+        var decryptedAilment = ailments.map(function (ailment) { return encryption_js_1.decrypt(ailment); });
+        return res.status(200).send({ ailments: decryptedAilment });
     })["catch"](next);
 };
 exports.postUserAilment = function (req, res, next) {
     var ailmentObj = req.body;
     var username = req.params.username;
-    ailmentObj.patient_username = username;
-    patients_js_1.createUserAilment(ailmentObj)
+    var encryptedUsername = encryption_js_1.encrypt(req.params);
+    var encryptedAilment = encryption_js_1.encrypt(req.body);
+    encryptedAilment.patient_username = encryptedUsername.username;
+    patients_js_1.createUserAilment(encryptedAilment)
         .then(function (_a) {
         var ailment = _a[0];
-        res.status(201).send({ ailment: ailment });
+        var decryptedAilment = encryption_js_1.decrypt(ailment);
+        res.status(201).send({ ailment: decryptedAilment });
     })["catch"](next);
 };

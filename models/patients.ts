@@ -16,7 +16,6 @@ export const updatePatient = (username: string, { patient_username, patient_pass
 	if (surgery_id) updatePatientDetails.surgery_id = surgery_id;
 	if (emerg_contact) updatePatientDetails.emerg_contact = emerg_contact;
 	if (general_med) updatePatientDetails.general_med = general_med;
-	console.log(updatePatientDetails)
 	return connection('patients').where('patient_username', username).update(updatePatientDetails).returning('*')
 }
 

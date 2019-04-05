@@ -27,7 +27,6 @@ exports.updatePatient = function (username, _a) {
         updatePatientDetails.emerg_contact = emerg_contact;
     if (general_med)
         updatePatientDetails.general_med = general_med;
-    console.log(updatePatientDetails);
     return connection('patients').where('patient_username', username).update(updatePatientDetails).returning('*');
 };
 exports.deletePatient = function (username) {
