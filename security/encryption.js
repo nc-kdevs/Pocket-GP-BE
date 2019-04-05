@@ -1,31 +1,10 @@
 const crypto = require('crypto')
 
-let iv = crypto.randomBytes(16)
+const iv = crypto.randomBytes(16)
 
 const encKey = '12345678123456781234567812345678';
 
-// export let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
-// export let encrypted = cipher.update(dataToEnc, 'utf-8', 'hex');
-// encrypted += cipher.final('hex');
-
-// export const encryptDataObj = (dataObj) => {
-//   const {dataObj} = dataToEnc  
-//   const encKey = '12345678123456781234567812345678';
-//   let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
-//   let encrypted = cipher.update(dataToEnc, 'utf-8', 'hex');
-//   encrypted += cipher.final('hex');
-//     return encrypted
-// }
-
-// export const encryptData = (data) => {
-//   const encKey = '12345678123456781234567812345678';
-//   let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
-//   let encrypted = cipher.update(dataToEnc, 'utf-8', 'hex');
-//   encrypted += cipher.final('hex');
-//     return encrypted
-// }
-
-exports.encrypt = (obj) => {
+const encrypt = (obj) => {
   const array = Object.entries(obj);
   const newArray = array.map(([key, value]) => {
     if (typeof value === 'string') {
@@ -42,3 +21,28 @@ exports.encrypt = (obj) => {
   })
   return encryptedObj;
 }
+
+const decrypt = (encryptedObj) => {
+  const array = Object.entries(encryptedObj);
+  const newArray = array.map(([key, value]) => {
+    if (typeof value === 'string') {
+      let decipher = crypto.createDecipheriv('aes-256-cbc', encKey, iv);
+      let decrypted = decipher.update(value, 'hex', 'utf-8');
+      decrypted += decipher.final('utf-8');
+      return [key, decrypted];
+    }
+    else return [key, value];
+  })
+  const decryptedObj = {};
+  newArray.forEach(([key, value]) => {
+    decryptedObj[key] = value;
+  })
+  return decryptedObj;
+}
+// const obj = { a: 'test msg', b: 2019, c: 'another message super secret' };
+// const enc = encrypt(obj);
+// console.log(enc, '<-- encrypted');
+// const dec = decrypt(enc)
+// console.log(dec, '<-- decrypted')
+
+module.exports = { encrypt, decrypt }
