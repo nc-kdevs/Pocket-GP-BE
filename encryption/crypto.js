@@ -45,17 +45,19 @@ encryptData = (data) => {
   let cipher = crypto.createCipheriv('aes-256-cbc', encKey, iv);
   let encrypted = cipher.update(data, 'utf-8', 'hex');
   encrypted += cipher.final('hex');
-    return encrypted
+    return encrypted + iv
 }
 
 console.log('ENCRYPTED---->', encryptData(secretMessage))
 
-decryptData = (encrypted) => {
+decryptData = (encrypted, iv) => {
   const decKey = '12345678123456781234567812345678';
   let decipher = crypto.createDecipheriv('aes-256-cbc', decKey, iv);
   let decrypted = decipher.update(encrypted, 'hex', 'utf-8');
   decrypted += decipher.final('utf-8');
     return decrypted
 }
+
+console.log('DECRYPTED---->', decryptData('74ea58f1ae557228919b940cf6d8906a87d196f8875c8565e5077e973d1473d5'))
 
 
