@@ -1,12 +1,12 @@
 import { fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient, getUserAilments, createUserAilment } from '../models/patients.js';
 import { Request, Response, NextFunction } from 'express';
-import { encrypt, decrypt } from '../security/encryption.js'
+import { encrypt, decrypt } from '../security/encryption.js';
 
 export const getPatientByUsername = (req: Request, res: Response, next: NextFunction) => {
 	const { username } = req.params
 	const encryptedUsername = encrypt(req.params)
 	fetchPatientByUsername(encryptedUsername.username)
-		.then(([patient]) => {
+		.then(([patient]:[object]) => {
 			const decryptedPatient = decrypt(patient)
 			res.status(200).send({ patient: decryptedPatient })
 		})
@@ -19,7 +19,7 @@ export const updatePatientByUsername = (req: Request, res: Response, next: NextF
 	const encryptedUsername = encrypt(req.params)
 	const encryptedPatient = encrypt(req.body)
 	updatePatient(encryptedUsername.username, encryptedPatient)
-		.then(([patient]) => {
+		.then(([patient]:[object]) => {
 			const decryptedPatient = decrypt(patient)
 			res.status(200).send({ patient: decryptedPatient });
 		})
@@ -39,7 +39,7 @@ export const deletePatientByUsername = (req: Request, res: Response, next: NextF
 export const getAllPatients = (req: Request, res: Response, next: NextFunction) => {
 	const { surgery_id } = req.query;
 	getPatients({ surgery_id })
-		.then(([patients]) => {
+		.then(([patients]:[object[]]) => {
 			const decryptedPatients = decrypt(patients)
 			res.status(200).send({ patients: decryptedPatients })
 		})
@@ -50,7 +50,7 @@ export const postPatient = (req: Request, res: Response, next: NextFunction) => 
 	const newPatient: object = req.body;
 	const encryptedPatient = encrypt(req.body)
 	addPatient(encryptedPatient)
-		.then(([patient]) => {
+		.then(([patient]:[object]) => {
 			const decryptedPatient = decrypt(patient)
 			return res.status(201).send({ patient: decryptedPatient })
 		})
@@ -75,7 +75,7 @@ export const postUserAilment = (req: Request, res: Response, next: NextFunction)
 	const encryptedAilment = encrypt(req.body)
 	encryptedAilment.patient_username = encryptedUsername.username
 	createUserAilment(encryptedAilment)
-		.then(([ailment]) => {
+		.then(([ailment]:[object]) => {
 			const decryptedAilment = decrypt(ailment)
 			res.status(201).send({ ailment: decryptedAilment })
 		})

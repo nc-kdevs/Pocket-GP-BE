@@ -5,7 +5,7 @@ import { encrypt, decrypt } from '../security/encryption.js'
 export const getAilmentData = (req: Request, res: Response, next: NextFunction) => {
   const { ailment_id } = req.params;
   fetchAilment(ailment_id)
-    .then(([ailment]) => {
+    .then(([ailment]:[object]) => {
       const decryptedAilment = decrypt(ailment)
       res.status(200).send({ ailment: decryptedAilment });
     })
@@ -17,7 +17,7 @@ export const patchAilmentData = (req: Request, res: Response, next: NextFunction
   const { ailment_type, ailment_name, ailment_description, image, prescription, treatment_plan } = req.body;
   const encryptedAilment = encrypt(req.body)
   updateAilment(ailment_id, encryptedAilment)
-    .then(([ailment]) => {
+    .then(([ailment]:[object]) => {
       const decryptedAilment = decrypt(ailment)
       res.status(200).send({ ailment: decryptedAilment });
     })

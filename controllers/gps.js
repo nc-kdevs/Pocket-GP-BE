@@ -6,7 +6,7 @@ exports.getGps = function (req, res, next) {
     var surgery = req.query.surgery;
     var conditions = {};
     if (surgery)
-        conditions['gps.surgery_id'] = surgery;
+        conditions["gps.surgery_id"] = surgery;
     gps_js_1.fetchGps(conditions)
         .then(function (gps) {
         var decryptedGps = gps.map(function (gp) { return encryption_js_1.decrypt(gp); });
@@ -30,7 +30,7 @@ exports.getGpByID = function (req, res, next) {
         var gp = _a[0];
         var decryptedGp = encryption_js_1.decrypt(gp);
         if (!gp)
-            return Promise.reject({ code: '22001' });
+            return Promise.reject({ code: "22001" });
         return res.status(200).send({ gp: decryptedGp });
     })["catch"](next);
 };
@@ -41,6 +41,6 @@ exports.deleteGpByID = function (req, res, next) {
         if (deletedGp === 1)
             res.sendStatus(204);
         else
-            res.status(404).send({ status: 404, msg: 'Not found' });
+            res.status(404).send({ status: 404, msg: "Not found" });
     })["catch"](next);
 };
