@@ -25,7 +25,7 @@ const encrypt = (obj) => {
 const decrypt = (encryptedObj) => {
   const array = Object.entries(encryptedObj);
   const newArray = array.map(([key, value]) => {
-    if (typeof value === 'string') {
+    if (typeof value === 'string' && value) {
       let decipher = crypto.createDecipheriv('aes-256-cbc', encKey, iv);
       let decrypted = decipher.update(value, 'hex', 'utf-8');
       decrypted += decipher.final('utf-8');
