@@ -4,7 +4,6 @@ exports.seed = function (knex, Promise) { return knex.migrate
     .rollback()
     .then(function () { return knex.migrate.latest(); })
     .then(function () {
-    console.log(surgeryData);
     var encryptedSurgeryData = surgeryData.map(function (surgery) { return encrypt(surgery); });
     return knex('surgeries').insert(encryptedSurgeryData).returning('*');
 })
