@@ -15,7 +15,7 @@ export const postSurgery = (req: Request, res: Response, next: NextFunction) => 
   const newSurgery: object = req.body;
   const encryptedSurgery = encrypt(req.body)
   addSurgery(encryptedSurgery)
-    .then(([surgery]) => {
+    .then(([surgery]:[object]) => {
       const decryptedSurgery = decrypt(surgery)
       return res.status(201).send({surgery: decryptedSurgery})
     })
@@ -25,7 +25,7 @@ export const postSurgery = (req: Request, res: Response, next: NextFunction) => 
 export const getSurgeryByID = (req: Request, res: Response, next: NextFunction) => {
   const surgery_id: number = req.params.surgery_id;
   fetchSurgeryByID(surgery_id)
-    .then(([surgery]) => {
+    .then(([surgery]:[object]) => {
       const decryptedSurgery = decrypt(surgery)
       res.status(200).send({surgery: decryptedSurgery})
     })
@@ -37,7 +37,7 @@ export const patchSurgeryByID = (req: Request, res: Response, next: NextFunction
   const {surgery_name, surgery_address} = req.body;
   const encryptedSurgery = encrypt(req.body)
   updateSurgery(surgery_id, encryptedSurgery)
-    .then(([surgery]) => {
+    .then(([surgery]:[object]) => {
       const decryptedSurgery = decrypt(surgery)
       res.status(200).send({surgery: decryptedSurgery})
     })
