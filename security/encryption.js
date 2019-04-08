@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 
-const iv = crypto.randomBytes(16)
+const iv = Buffer.alloc(16, 0);
 
 const encKey = '12345678123456781234567812345678';
 
