@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export const handle400 = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   const { code } = err;
   const errorCodes400 = {
     [code]: 'Invalid Request'
@@ -11,6 +12,7 @@ export const handle400 = (err: any, req: Request, res: Response, next: NextFunct
 }
 
 export const handle404 = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   const { code } = err;
   const errorCodes404 = {
     [code]: 'Not Found'
@@ -21,6 +23,7 @@ export const handle404 = (err: any, req: Request, res: Response, next: NextFunct
 };
 
 export const handle422 = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   const { code } = err;
   const errorCodes422 = {
     [code]: 'Unique Key Violation!. Request cannot be proccessed',
@@ -31,9 +34,11 @@ export const handle422 = (err: any, req: Request, res: Response, next: NextFunct
 };
 
 export const handle500 = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   res.status(422).send({ message: 'Property does not Exist - Internal Server Error' });
 };
 
 export const handle405 = (err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   res.status(405).send({ msg: 'Method Not Allowed' });
 };
