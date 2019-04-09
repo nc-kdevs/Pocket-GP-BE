@@ -6,11 +6,11 @@ export const getPatientByUsername = (req: Request, res: Response, next: NextFunc
 	const { username } = req.params
 	const encryptedUsername = encrypt(req.params)
 	fetchPatientByUsername(encryptedUsername.username)
-		.then(([patient]:[object]) => {
+		.then(([patient]: [object]) => {
 			const decryptedPatient = decrypt(patient)
 			res.status(200).send({ patient: decryptedPatient })
 		})
-		.catch()
+		.catch(console.log)
 }
 
 export const updatePatientByUsername = (req: Request, res: Response, next: NextFunction) => {
@@ -19,11 +19,11 @@ export const updatePatientByUsername = (req: Request, res: Response, next: NextF
 	const encryptedUsername = encrypt(req.params)
 	const encryptedPatient = encrypt(req.body)
 	updatePatient(encryptedUsername.username, encryptedPatient)
-		.then(([patient]:[object]) => {
+		.then(([patient]: [object]) => {
 			const decryptedPatient = decrypt(patient)
 			res.status(200).send({ patient: decryptedPatient });
 		})
-		.catch(next)
+		.catch(console.log)
 }
 
 export const deletePatientByUsername = (req: Request, res: Response, next: NextFunction) => {
@@ -33,28 +33,28 @@ export const deletePatientByUsername = (req: Request, res: Response, next: NextF
 			if (output === 1) res.sendStatus(204);
 			else next({ status: 404 })
 		})
-		.catch(next)
+		.catch(console.log)
 }
 
 export const getAllPatients = (req: Request, res: Response, next: NextFunction) => {
 	const { surgery_id } = req.query;
 	getPatients({ surgery_id })
-		.then(([patients]:[object[]]) => {
+		.then(([patients]: [object[]]) => {
 			const decryptedPatients = decrypt(patients)
 			res.status(200).send({ patients: decryptedPatients })
 		})
-		.catch(next)
+		.catch(console.log)
 }
 
 export const postPatient = (req: Request, res: Response, next: NextFunction) => {
 	const newPatient: object = req.body;
 	const encryptedPatient = encrypt(req.body)
 	addPatient(encryptedPatient)
-		.then(([patient]:[object]) => {
+		.then(([patient]: [object]) => {
 			const decryptedPatient = decrypt(patient)
 			return res.status(201).send({ patient: decryptedPatient })
 		})
-		.catch(next)
+		.catch(console.log)
 }
 
 export const fetchUserAilments = (req: Request, res: Response, next: NextFunction) => {
@@ -65,7 +65,7 @@ export const fetchUserAilments = (req: Request, res: Response, next: NextFunctio
 			const decryptedAilment = ailments.map(ailment => decrypt(ailment))
 			return res.status(200).send({ ailments: decryptedAilment })
 		})
-		.catch(next)
+		.catch(console.log)
 }
 
 export const postUserAilment = (req: Request, res: Response, next: NextFunction) => {
@@ -75,9 +75,9 @@ export const postUserAilment = (req: Request, res: Response, next: NextFunction)
 	const encryptedAilment = encrypt(req.body)
 	encryptedAilment.patient_username = encryptedUsername.username
 	createUserAilment(encryptedAilment)
-		.then(([ailment]:[object]) => {
+		.then(([ailment]: [object]) => {
 			const decryptedAilment = decrypt(ailment)
 			res.status(201).send({ ailment: decryptedAilment })
 		})
-		.catch(next)
+		.catch(console.log)
 }
