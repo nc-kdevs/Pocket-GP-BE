@@ -1,19 +1,25 @@
 const {
   patientsData, gpsData, ailmentsData, surgeryData,
 } = require('../data/index.js');
+const { encrypt } = require('../../security/encryption.js')
+import Knex = require('knex');
 
-exports.seed = (knex, Promise) => knex.migrate
+exports.seed = (knex: Knex, Promise) => knex.migrate
   .rollback()
   .then(() => knex.migrate.latest())
   .then(() => {
-    return knex('surgeries').insert(surgeryData).returning('*')
+    const encryptedSurgeryData = surgeryData.map((surgery: object) => encrypt(surgery))
+    return knex('surgeries').insert(encryptedSurgeryData).returning('*')
   })
   .then(() => {
-    return knex('gps').insert(gpsData).returning('*')
+    const encryptedGpData = gpsData.map((gp: object) => encrypt(gp))
+    return knex('gps').insert(encryptedGpData).returning('*')
   })
   .then(() => {
-    return knex('patients').insert(patientsData).returning('*')
+    const encryptedPatientData = patientsData.map((patient: object) => encrypt(patient))
+    return knex('patients').insert(encryptedPatientData).returning('*')
   })
   .then(() => {
-    return knex('ailments').insert(ailmentsData).returning('*')
+    const encryptedAilmentData = ailmentsData.map((ailment: object) => encrypt(ailment))
+    return knex('ailments').insert(encryptedAilmentData).returning('*')
   }); 

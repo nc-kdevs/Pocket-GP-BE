@@ -7,4 +7,8 @@ surgeriesRouter.route('/')
     .get(surgeries_js_1.getSurgeries)
     .post(surgeries_js_1.postSurgery);
 // .all(handle405);
+surgeriesRouter.route('/:surgery_id')
+    .get(surgeries_js_1.getSurgeryByID)
+    .patch(surgeries_js_1.patchSurgeryByID)["delete"](surgeries_js_1.deleteSurgeryByID);
+// .all(handle405);
 exports["default"] = surgeriesRouter;
