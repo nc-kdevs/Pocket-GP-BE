@@ -1,6 +1,7 @@
-import { fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient, getUserAilments, createUserAilment } from '../models/patients.js';
+import { fetchPatientByUsername, updatePatient, deletePatient, getPatients, addPatient, getUserAilments, createUserAilment, fetchImgData } from '../models/patients.js';
 import { Request, Response, NextFunction } from 'express';
 import { encrypt, decrypt } from '../security/encryption.js';
+import { analyzeImg } from '../db/utils/imageRecog';
 
 export const getPatientByUsername = (req: Request, res: Response, next: NextFunction) => {
 	const { username } = req.params
@@ -78,6 +79,21 @@ export const postUserAilment = (req: Request, res: Response, next: NextFunction)
 		.then(([ailment]: [object]) => {
 			const decryptedAilment = decrypt(ailment)
 			res.status(201).send({ ailment: decryptedAilment })
+		})
+		.catch(console.log)
+}
+
+export const getImgData = (req: Request, res: Response, next: NextFunction) => {
+	const { ailment_id } = req.params;
+	fetchImgData(ailment_id)
+		.then(([image]: [object]) => {
+			const decryptedImg = decrypt(image);
+			// if (decryptedImg) {
+			const img = "https://upload.wikimedia.org/wikipedia/commons/8/8a/LGBT_Rainbow_Flag.png"
+			const analyzedData = analyzeImg(img);
+			console.log(analyzedData)
+			res.status(200).send({ imgData: analyzedData })
+			// }
 		})
 		.catch(console.log)
 }
