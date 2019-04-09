@@ -9,9 +9,9 @@ exports.up = function (knex, Promise) {
       ailmentsTable.string('ailment_name').notNullable();
       ailmentsTable.string('ailment_description', 255).notNullable();
       ailmentsTable.timestamp('date', { useTz: true }).defaultsTo(knex.fn.now());
-      ailmentsTable.string('image');
-      ailmentsTable.string('prescription');
-      ailmentsTable.string('treatment_plan');
+      ailmentsTable.string('image', 500);
+      ailmentsTable.string('prescription', 500);
+      ailmentsTable.string('treatment_plan', 500);
     })
 };
 

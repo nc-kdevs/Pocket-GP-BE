@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var _a = require('../data/index.js'), patientsData = _a.patientsData, gpsData = _a.gpsData, ailmentsData = _a.ailmentsData, surgeryData = _a.surgeryData;
 var encrypt = require('../../security/encryption.js').encrypt;
 exports.seed = function (knex, Promise) { return knex.migrate
