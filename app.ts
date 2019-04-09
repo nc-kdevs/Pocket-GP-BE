@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api', apiRouter);
 
+
 app.all('/*', (req: Request, res: Response) => {
   res.status(404).send({ status: 404, msg: 'Sorry, not found...' });
 });

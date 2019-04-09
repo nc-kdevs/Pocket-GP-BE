@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.handle400 = function (err, req, res, next) {
     var _a;
+    console.log(err);
     var code = err.code;
     var errorCodes400 = (_a = {},
         _a[code] = 'Invalid Request',
@@ -14,6 +15,7 @@ exports.handle400 = function (err, req, res, next) {
 };
 exports.handle404 = function (err, req, res, next) {
     var _a;
+    console.log(err);
     var code = err.code;
     var errorCodes404 = (_a = {},
         _a[code] = 'Not Found',
@@ -26,6 +28,7 @@ exports.handle404 = function (err, req, res, next) {
 };
 exports.handle422 = function (err, req, res, next) {
     var _a;
+    console.log(err);
     var code = err.code;
     var errorCodes422 = (_a = {},
         _a[code] = 'Unique Key Violation!. Request cannot be proccessed',
@@ -37,8 +40,10 @@ exports.handle422 = function (err, req, res, next) {
         next(err);
 };
 exports.handle500 = function (err, req, res, next) {
+    console.log(err);
     res.status(422).send({ message: 'Property does not Exist - Internal Server Error' });
 };
 exports.handle405 = function (err, req, res, next) {
+    console.log(err);
     res.status(405).send({ msg: 'Method Not Allowed' });
 };
