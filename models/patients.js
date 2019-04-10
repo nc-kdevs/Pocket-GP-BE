@@ -54,3 +54,10 @@ exports.createUserAilment = function (ailmentObj) {
         .into('ailments')
         .returning('*');
 };
+exports.fetchImgData = function (ailment_id) {
+    return connection
+        .select('image')
+        .from('ailments')
+        .where({ ailment_id: ailment_id })
+        .returning('*');
+};

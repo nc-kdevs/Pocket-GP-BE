@@ -104,6 +104,11 @@ describe('/', function () {
                 expect(res.body.ailment).to.contain.keys('ailment_type', 'ailment_name', 'ailment_description', 'ailment_id', 'patient_username');
             });
         });
+        it.only('GET 200 /:ailment_id/images returns analyzed image data for an ailment', function () {
+            return request.get('/api/ailments/1/images').expect(200).then(function (res) {
+                console.log(res.body);
+            });
+        });
         describe('/surgeries', function () {
             it('GET 200 returns a list of all the surgeries', function () {
                 return request.get('/api/surgeries').expect(200).then(function (res) {
