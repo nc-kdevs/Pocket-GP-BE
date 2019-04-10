@@ -84,9 +84,10 @@ exports.getImgData = function (req, res, next) {
         var decryptedImg = encryption_js_1.decrypt(image);
         // if (decryptedImg) {
         var img = "https://upload.wikimedia.org/wikipedia/commons/8/8a/LGBT_Rainbow_Flag.png";
-        var analyzedData = imageRecog_1.analyzeImg(img);
-        console.log(analyzedData);
-        res.status(200).send({ imgData: analyzedData });
+        imageRecog_1.analyzeImg(img)
+            .then(function (analyzedData) {
+            res.status(200).send({ imgData: analyzedData });
+        });
         // }
     })["catch"](console.log);
 };

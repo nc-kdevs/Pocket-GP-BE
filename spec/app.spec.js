@@ -106,7 +106,7 @@ describe('/', function () {
         });
         it.only('GET 200 /:ailment_id/images returns analyzed image data for an ailment', function () {
             return request.get('/api/ailments/1/images').expect(200).then(function (res) {
-                console.log(res.body);
+                console.log(res.body, '<-- this one?');
             });
         });
         describe('/surgeries', function () {

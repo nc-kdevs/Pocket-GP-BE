@@ -127,7 +127,7 @@ describe('/', () => {
     });
     it.only('GET 200 /:ailment_id/images returns analyzed image data for an ailment', () => {
       return request.get('/api/ailments/1/images').expect(200).then((res: any) => {
-        console.log(res.body)
+        console.log(res.body, '<-- this one?')
       })
     });
 

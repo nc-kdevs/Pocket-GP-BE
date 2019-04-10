@@ -90,9 +90,10 @@ export const getImgData = (req: Request, res: Response, next: NextFunction) => {
 			const decryptedImg = decrypt(image);
 			// if (decryptedImg) {
 			const img = "https://upload.wikimedia.org/wikipedia/commons/8/8a/LGBT_Rainbow_Flag.png"
-			const analyzedData = analyzeImg(img);
-			console.log(analyzedData)
-			res.status(200).send({ imgData: analyzedData })
+			analyzeImg(img)
+			.then(analyzedData => {
+				res.status(200).send({ imgData: analyzedData })
+			})
 			// }
 		})
 		.catch(console.log)
