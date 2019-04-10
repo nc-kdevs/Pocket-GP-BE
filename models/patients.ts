@@ -46,3 +46,11 @@ export const createUserAilment = (ailmentObj: object) => {
 		.into('ailments')
 		.returning('*');
 }
+
+export const fetchImgData = (ailment_id: number) => {
+	return connection
+		.select('image')
+		.from('ailments')
+		.where({ ailment_id })
+		.returning('*');
+}

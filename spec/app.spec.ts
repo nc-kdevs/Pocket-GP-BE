@@ -13,27 +13,27 @@ describe('/', () => {
   describe('/gps', () => {
     it('GET:200 returns a list of all gps', () => {
       return request
-      .get('/api/gps')
-      .expect(200)
-      .then((res: any) => {
-        expect(res.body.gps[0]).to.contain.keys(
-          'gp_id',
-          'gp_name',
-          'surgery_id'
-        )
-      });
+        .get('/api/gps')
+        .expect(200)
+        .then((res: any) => {
+          expect(res.body.gps[0]).to.contain.keys(
+            'gp_id',
+            'gp_name',
+            'surgery_id'
+          )
+        });
     });
     it('GET:200 query of surgery_id returns gps with that surgery_id', () => {
       return request
-      .get('/api/gps?surgery=1')
-      .expect(200)
-      .then((res: any) => {
-        expect(res.body.gps[0]).to.contain.keys(
-          'gp_id',
-          'gp_name',
-          'surgery_id'
-        )
-      });
+        .get('/api/gps?surgery=1')
+        .expect(200)
+        .then((res: any) => {
+          expect(res.body.gps[0]).to.contain.keys(
+            'gp_id',
+            'gp_name',
+            'surgery_id'
+          )
+        });
     });
     it('POST:200 returns new posted gp', () => {
       const newGp = {
@@ -41,25 +41,25 @@ describe('/', () => {
         surgery_id: 1
       }
       return request
-      .post('/api/gps')
-      .send(newGp)
-      .expect(201)
-      .then((res: any) => {
-        expect(res.body.gp).to.contain.keys(
-          'gp_id',
-          'gp_name',
-          'surgery_id'
-        )
-      });
+        .post('/api/gps')
+        .send(newGp)
+        .expect(201)
+        .then((res: any) => {
+          expect(res.body.gp).to.contain.keys(
+            'gp_id',
+            'gp_name',
+            'surgery_id'
+          )
+        });
     });
     describe('/:gps', () => {
       it('GET:200 returns gp by id', () => {
         return request
-        .get('/api/gps/2')
-        .expect(200)
-        .then((res: any) => {
-          expect(res.body.gp.gp_name).to.equal('Madame Pomfrey')
-      })
+          .get('/api/gps/2')
+          .expect(200)
+          .then((res: any) => {
+            expect(res.body.gp.gp_name).to.equal('Madame Pomfrey')
+          })
       });
       it('DEL: delete gp by id', () => {
         return request
@@ -125,6 +125,11 @@ describe('/', () => {
           )
         });
     });
+    it.only('GET 200 /:ailment_id/images returns analyzed image data for an ailment', () => {
+      return request.get('/api/ailments/1/images').expect(200).then((res: any) => {
+        console.log(res.body, '<-- this one?')
+      })
+    });
 
     describe('/surgeries', () => {
       it('GET 200 returns a list of all the surgeries', () => {
@@ -151,7 +156,7 @@ describe('/', () => {
       });
     });
     it('GET 200/ ailment by ailment_id', () => {
-      return request.get('/api/ailments/1').expect(200).then((res:any) => {
+      return request.get('/api/ailments/1').expect(200).then((res: any) => {
         expect(res.body.ailment.ailment_description).to.eql('exam pressure, thinks everyone is out to get him')
       })
     })
